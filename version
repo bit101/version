@@ -5,7 +5,7 @@ java)
   $1 -version
   ;;
 
-gcc | rustc)
+gcc | rustc | dotnet)
   $1 --version
   ;;
 
