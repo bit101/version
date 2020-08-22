@@ -11,7 +11,7 @@ java | swift | kotlin)
   $1 -version
   ;;
 
-gcc | rustc | clang | zsh | bash)
+gcc | rustc | clang | zsh | bash | dotnet)
   $1 --version
   ;;
 
