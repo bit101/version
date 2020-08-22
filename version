@@ -21,4 +21,8 @@ go)
   $1 version
   ;;
 
+*)
+  echo "'$1' does not seem to be installed."
+  ;;
+
 esac
