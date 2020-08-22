@@ -9,7 +9,7 @@ gcc | rustc)
   $1 --version
   ;;
 
-node | perl | lua)
+node | perl | lua | npm)
   $1 -v
   ;;
 
