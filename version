@@ -1,19 +1,25 @@
 #! /bin/bash 
 
+if ! command -v $1 &> /dev/null
+then
+    echo "'$1' does not seem to be installed"
+    exit
+fi
+
 case $1 in
-java)
+java | swift | kotlin)
   $1 -version
   ;;
 
-gcc | rustc)
+gcc | rustc | clang | zsh | bash)
   $1 --version
   ;;
 
-node | perl | lua | npm)
+node | perl | lua | ruby | npm)
   $1 -v
   ;;
 
-python)
+python | tmux | ssh)
   $1 -V
   ;;
 
@@ -22,7 +28,8 @@ go)
   ;;
 
 *)
-  echo "'$1' does not seem to be installed."
+  echo "I don't know how to find the version of '$1'."
+  echo "If you figure it out, let me know at https://github.com/bit101/version"
   ;;
 
 esac
