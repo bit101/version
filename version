@@ -15,7 +15,7 @@ gcc | rustc | clang | zsh | bash)
   $1 --version
   ;;
 
-node | perl | lua | ruby)
+node | perl | lua | ruby | npm)
   $1 -v
   ;;
 
