@@ -25,7 +25,8 @@ fi
 if [ $1 == -c ]
 then
   # all instances of pipe or rparen in this file
-  rawcount=$(egrep -o "\||)" $(which version) | wc -l)
+  rawcount=$(egrep -o "\||)" $(which version) |\
+wc -l)
   # subtract the 10 extraneous instances of pipe and rparen
   # 2 in the help, 7 in this block, and the default case below
   count=$(expr $rawcount - 10)
@@ -47,25 +48,80 @@ fi
 
 case $1 in
 
-go | haxelib | restic | yarn)
+# version
+go |\
+haxelib |\
+restic |\
+yarn)
   $1 version
   ;;
 
-conky | exa | firefox | kodi | lua | make | node | nordvpn | npm | perl \
-  | ruby | slack | version)
+# -v
+conky |\
+exa |\
+firefox |\
+kodi |\
+lua |\
+make |\
+node |\
+nordvpn |\
+npm |\
+perl |\
+rbenv |\
+ruby |\
+slack |\
+version)
   $1 -v
   ;;
 
-alacritty | grep | python | rg | ssh | tmux)
+
+# -V
+alacritty |\
+grep |\
+nano |\
+python |\
+python2 |\
+python3 |\
+rg |\
+ssh |\
+tmux)
   $1 -V
   ;;
 
-ffmpeg | gimp | haxe | java | javac | kotlin | nano | nvim | swift | vi | vim)
+# -version
+ffmpeg |\
+gimp |\
+haxe |\
+java |\
+javac |\
+kotlin |\
+nvim |\
+swift |\
+vi |\
+vim)
   $1 -version
   ;;
 
-arduino | awk | bash | clang | convert | dotnet | fzf | gcc | gdb | git \
-  | gradle | inkscape | magick | ranger | rsync | rustc | sed | vlc | zsh)
+# --version
+arduino |\
+awk |\
+bash |\
+clang |\
+convert |\
+dotnet |\
+fzf |\
+gcc |\
+gdb |\
+git |\
+gradle |\
+inkscape |\
+magick |\
+ranger |\
+rsync |\
+rustc |\
+sed |\
+vlc |\
+zsh)
   $1 --version
   ;;
 
