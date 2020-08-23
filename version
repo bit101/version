@@ -1,14 +1,24 @@
 #! /bin/bash 
 
+ver="v0.1.0"
+
+if [ -z $1 ]
+then
+  echo "Usage: version <program>"
+  exit
+fi
+
 if [ $1 == -h ]
 then
-  echo "version tells you the versions of programs you have installed."
+  echo "version displays the versions of programs you have installed."
+  echo ""
   echo "Usage:"
-  echo "  version <program>       get version of program (if known and installed)"
-  echo "  version -h              display this help"
-  echo "  version -c              display count of how many programs are known"
-  echo "  version -v              display version of version."
-  echo "                          yes, 'version version' also works!"
+  echo "  version <program>    display version of program"
+  echo "                       (if known and installed)"
+  echo "  version -h           display this help"
+  echo "  version -c           display count of known programs"
+  echo "  version -v           display version of version"
+  echo "                       (yes, 'version version' also works!)"
   exit
 fi
 
@@ -16,15 +26,16 @@ if [ $1 == -c ]
 then
   # all instances of pipe or rparen in this file
   rawcount=$(egrep -o "\||)" version | wc -l)
-  # subtract the 6 instances in this block and 1 in the default case
-  count=$(expr $rawcount - 7)
+  # subtract the 9 extraneous instances of pipe and rparen
+  # 2 in the help, 6 in this block, and the default case below
+  count=$(expr $rawcount - 9)
   echo "I can find the versions of $count programs!"
   exit
 fi
 
 if [ $1 == -v ]
 then
-  echo "version v0.1.0"
+  echo "version $ver"
   exit
 fi
 
@@ -39,7 +50,8 @@ java | swift | kotlin | vi | vim | nvim)
   $1 -version
   ;;
 
-gcc | rustc | clang | zsh | bash | rsync | git | dotnet)
+gcc | rustc | clang | zsh | bash | rsync | git | dotnet | arduino \
+| vlc | convert | ranger | fzf)
   $1 --version
   ;;
 
