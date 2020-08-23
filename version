@@ -2,64 +2,64 @@
 
 ver="v0.3.0"
 
-declare -A tools
-tools[alacritty]=-V
-tools[arduino]=--version
-tools[awk]=--version
-tools[bash]=--version
-tools[clang]=--version
-tools[conky]=-v
-tools[convert]=--version
-tools[dotnet]=--version
-tools[exa]=-v
-tools[ffmpeg]=-version
-tools[firefox]=-v
-tools[fzf]=--version
-tools[gcc]=--version
-tools[gdb]=--version
-tools[gimp]=-version
-tools[git]=--version
-tools[go]=version
-tools[gradle]=--version
-tools[grep]=-V
-tools[haxe]=-version
-tools[haxelib]=version
-tools[inkscape]=--version
-tools[java]=-version
-tools[javac]=-version
-tools[kodi]=-v
-tools[kotlin]=-version
-tools[lua]=-v
-tools[magick]=--version
-tools[man]=--version
-tools[make]=-v
-tools[nano]=-version
-tools[node]=-v
-tools[nordvpn]=-v
-tools[npm]=-v
-tools[nvim]=-version
-tools[perl]=-v
-tools[python]=-V
-tools[python2]=-V
-tools[python3]=-V
-tools[ranger]=--version
-tools[rbenv]=-v
-tools[restic]=version
-tools[rg]=-V
-tools[rsync]=--version
-tools[ruby]=-v
-tools[rustc]=--version
-tools[sed]=--version
-tools[slack]=-v
-tools[ssh]=-V
-tools[swift]=-version
-tools[tmux]=-V
-tools[version]=-v
-tools[vi]=-version
-tools[vim]=-version
-tools[vlc]=--version
-tools[yarn]=version
-tools[zsh]=--version
+tools_alacritty=-V
+tools_arduino=--version
+tools_awk=--version
+tools_bash=--version
+tools_clang=--version
+tools_conky=-v
+tools_convert=--version
+tools_dotnet=--version
+tools_exa=-v
+tools_ffmpeg=-version
+tools_firefox=-v
+tools_fzf=--version
+tools_gcc=--version
+tools_gdb=--version
+tools_gimp=-version
+tools_git=--version
+tools_go=version
+tools_gradle=--version
+tools_grep=-V
+tools_haxe=-version
+tools_haxelib=version
+tools_inkscape=--version
+tools_java=-version
+tools_javac=-version
+tools_kodi=-v
+tools_kotlin=-version
+tools_lua=-v
+tools_magick=--version
+tools_man=--version
+tools_make=-v
+tools_nano=-version
+tools_node=-v
+tools_nordvpn=-v
+tools_npm=-v
+tools_nvim=-version
+tools_perl=-v
+tools_python=-V
+tools_python2=-V
+tools_python3=-V
+tools_ranger=--version
+tools_rbenv=-v
+tools_restic=version
+tools_rg=-V
+tools_rsync=--version
+tools_ruby=-v
+tools_rustc=--version
+tools_sed=--version
+tools_slack=-v
+tools_ssh=-V
+tools_swift=-version
+tools_tmux=-V
+tools_version=-v
+tools_vi=-version
+tools_vim=-version
+tools_vlc=--version
+tools_yarn=version
+tools_zsh=--version
+
 
 # User forgot to specify the program or a flag
 if [ -z $1 ]
@@ -86,7 +86,7 @@ fi
 # Display recognized program count
 if [ $1 == -c ]
 then
-  count=${#tools[@]}
+  count=$(egrep -o "^tools_" $(which version) | wc -l)
   echo "I know how to find the versions of $count programs!"
   exit
 fi
@@ -106,12 +106,15 @@ then
 fi
 
 # Display the version if we know about the tool
-if [ ${tools[$1]+_} ]
+n=tools_$1
+version_arg=${!n}
+if [ -z $version_arg ]
 then
-  # success
-  $1 ${tools[$1]}
-else
   # don't know that one
   echo "I don't know how to find the version of '$1'."
   echo "If you figure it out, let me know at https://github.com/bit101/version"
+else
+  # success
+  $1 $version_arg
 fi
+
