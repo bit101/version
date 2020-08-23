@@ -25,10 +25,10 @@ fi
 if [ $1 == -c ]
 then
   # all instances of pipe or rparen in this file
-  rawcount=$(egrep -o "\||)" version | wc -l)
-  # subtract the 9 extraneous instances of pipe and rparen
-  # 2 in the help, 6 in this block, and the default case below
-  count=$(expr $rawcount - 9)
+  rawcount=$(egrep -o "\||)" $(which version) | wc -l)
+  # subtract the 10 extraneous instances of pipe and rparen
+  # 2 in the help, 7 in this block, and the default case below
+  count=$(expr $rawcount - 10)
   echo "I can find the versions of $count programs!"
   exit
 fi
@@ -63,7 +63,7 @@ python | tmux | ssh | grep | rg)
   $1 -V
   ;;
 
-go)
+go | restic)
   $1 version
   ;;
 
