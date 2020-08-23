@@ -39,11 +39,11 @@ java | swift | kotlin | vi | vim | nvim)
   $1 -version
   ;;
 
-gcc | rustc | clang | zsh | bash | rsync | git)
+gcc | rustc | clang | zsh | bash | rsync | git | dotnet)
   $1 --version
   ;;
 
-version | node | perl | lua | ruby)
+version | node | perl | lua | ruby | npm)
   $1 -v
   ;;
 
