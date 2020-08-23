@@ -47,7 +47,7 @@ fi
 
 case $1 in
 
-go | restic | yarn)
+go | haxelib | restic | yarn)
   $1 version
   ;;
 
@@ -60,7 +60,7 @@ alacritty | grep | python | rg | ssh | tmux)
   $1 -V
   ;;
 
-ffmpeg | gimp | java | javac | kotlin | nano | nvim | swift | vi | vim)
+ffmpeg | gimp | haxe | java | javac | kotlin | nano | nvim | swift | vi | vim)
   $1 -version
   ;;
 
