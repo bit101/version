@@ -1,13 +1,74 @@
 #! /bin/bash 
 
-ver="v0.2.0"
+ver="v0.3.0"
 
+tools_alacritty=-V
+tools_arduino=--version
+tools_awk=--version
+tools_bash=--version
+tools_clang=--version
+tools_conky=-v
+tools_convert=--version
+tools_dotnet=--version
+tools_exa=-v
+tools_ffmpeg=-version
+tools_firefox=-v
+tools_fzf=--version
+tools_gcc=--version
+tools_gdb=--version
+tools_gimp=-version
+tools_git=--version
+tools_go=version
+tools_gradle=--version
+tools_grep=-V
+tools_haxe=-version
+tools_haxelib=version
+tools_inkscape=--version
+tools_java=-version
+tools_javac=-version
+tools_kodi=-v
+tools_kotlin=-version
+tools_lua=-v
+tools_magick=--version
+tools_man=--version
+tools_make=-v
+tools_nano=-version
+tools_node=-v
+tools_nordvpn=-v
+tools_npm=-v
+tools_nvim=-version
+tools_perl=-v
+tools_python=-V
+tools_python2=-V
+tools_python3=-V
+tools_ranger=--version
+tools_rbenv=-v
+tools_restic=version
+tools_rg=-V
+tools_rsync=--version
+tools_ruby=-v
+tools_rustc=--version
+tools_sed=--version
+tools_slack=-v
+tools_ssh=-V
+tools_swift=-version
+tools_tmux=-V
+tools_version=-v
+tools_vi=-version
+tools_vim=-version
+tools_vlc=--version
+tools_yarn=version
+tools_zsh=--version
+
+
+# User forgot to specify the program or a flag
 if [ -z $1 ]
 then
   echo "Usage: version <program>"
   exit
 fi
 
+# Display help
 if [ $1 == -h ]
 then
   echo "version displays the versions of programs you have installed."
@@ -22,56 +83,38 @@ then
   exit
 fi
 
+# Display recognized program count
 if [ $1 == -c ]
 then
-  # all instances of pipe or rparen in this file
-  rawcount=$(egrep -o "\||)" $(which version) | wc -l)
-  # subtract the 10 extraneous instances of pipe and rparen
-  # 2 in the help, 7 in this block, and the default case below
-  count=$(expr $rawcount - 10)
+  count=$(egrep -o "^tools_" $(which version) | wc -l)
   echo "I know how to find the versions of $count programs!"
   exit
 fi
 
+# Display version of version
 if [ $1 == -v ]
 then
   echo "version $ver"
   exit
 fi
 
+# User does not have that program installed
 if ! command -v $1 &> /dev/null
 then
     echo "'$1' does not seem to be installed"
     exit
 fi
 
-case $1 in
-
-go | haxelib | restic | yarn)
-  $1 version
-  ;;
-
-conky | exa | firefox | kodi | lua | make | node | nordvpn | npm | perl \
-  | ruby | slack | version)
-  $1 -v
-  ;;
-
-alacritty | grep | python | rg | ssh | tmux)
-  $1 -V
-  ;;
-
-ffmpeg | gimp | haxe | java | javac | kotlin | nano | nvim | swift | vi | vim)
-  $1 -version
-  ;;
-
-arduino | awk | bash | clang | convert | dotnet | fzf | gcc | gdb | git \
-  | gradle | inkscape | magick | ranger | rsync | rustc | sed | vlc | zsh)
-  $1 --version
-  ;;
-
-*)
+# Display the version if we know about the tool
+tool=tools_$1
+version_arg=${!tool}
+if [ -z $version_arg ]
+then
+  # don't know that one
   echo "I don't know how to find the version of '$1'."
   echo "If you figure it out, let me know at https://github.com/bit101/version"
-  ;;
+else
+  # success
+  $1 $version_arg
+fi
 
-esac
