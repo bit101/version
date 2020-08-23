@@ -1,65 +1,12 @@
-#! /bin/bash 
+#! /bin/bash
 
 ver="v0.3.0"
 
-tools_alacritty=-V
-tools_arduino=--version
-tools_awk=--version
-tools_bash=--version
-tools_clang=--version
-tools_conky=-v
-tools_convert=--version
-tools_dotnet=--version
-tools_exa=-v
-tools_ffmpeg=-version
-tools_firefox=-v
-tools_fzf=--version
-tools_gcc=--version
-tools_gdb=--version
-tools_gimp=-version
-tools_git=--version
-tools_go=version
-tools_gradle=--version
-tools_grep=-V
-tools_haxe=-version
-tools_haxelib=version
-tools_inkscape=--version
-tools_java=-version
-tools_javac=-version
-tools_kodi=-v
-tools_kotlin=-version
-tools_lua=-v
-tools_magick=--version
-tools_man=--version
-tools_make=-v
-tools_nano=-version
-tools_node=-v
-tools_nordvpn=-v
-tools_npm=-v
-tools_nvim=-version
-tools_perl=-v
-tools_python=-V
-tools_python2=-V
-tools_python3=-V
-tools_ranger=--version
-tools_rbenv=-v
-tools_restic=version
-tools_rg=-V
-tools_rsync=--version
-tools_ruby=-v
-tools_rustc=--version
-tools_sed=--version
-tools_slack=-v
-tools_ssh=-V
-tools_swift=-version
-tools_tmux=-V
-tools_version=-v
-tools_vi=-version
-tools_vim=-version
-tools_vlc=--version
-tools_yarn=version
-tools_zsh=--version
+toolFile=`dirname $0`/tools
 
+while read p; do
+  eval "$p"
+done <$toolFile
 
 # User forgot to specify the program or a flag
 if [ -z $1 ]
@@ -86,7 +33,7 @@ fi
 # Display recognized program count
 if [ $1 == -c ]
 then
-  count=$(egrep -o "^tools_" $(which version) | wc -l)
+  count=$(<$toolFile wc -l)
   echo "I know how to find the versions of $count programs!"
   exit
 fi
