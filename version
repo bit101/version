@@ -106,8 +106,8 @@ then
 fi
 
 # Display the version if we know about the tool
-n=tools_$1
-version_arg=${!n}
+tool=tools_$1
+version_arg=${!tool}
 if [ -z $version_arg ]
 then
   # don't know that one
