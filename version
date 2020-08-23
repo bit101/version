@@ -51,7 +51,8 @@ go | restic | yarn)
   $1 version
   ;;
 
-conky | exa | firefox | lua | node | npm | perl | ruby | version)
+conky | exa | firefox | kodi | lua | make | node | nordvpn | npm | perl \
+  | ruby | slack | version)
   $1 -v
   ;;
 
@@ -59,11 +60,12 @@ alacritty | grep | python | rg | ssh | tmux)
   $1 -V
   ;;
 
-ffmpeg | gimp | java | kotlin | nano | nvim | swift | vi | vim)
+ffmpeg | gimp | java | javac | kotlin | nano | nvim | swift | vi | vim)
   $1 -version
   ;;
 
-arduino | bash | clang | convert | dotnet | fzf | gcc | gdb | git | gradle | ranger | rsync | rustc | vlc | zsh)
+arduino | awk | bash | clang | convert | dotnet | fzf | gcc | gdb | git \
+  | gradle | inkscape | magick | ranger | rsync | rustc | sed | vlc | zsh)
   $1 --version
   ;;
 
