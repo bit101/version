@@ -29,7 +29,7 @@ then
   # subtract the 10 extraneous instances of pipe and rparen
   # 2 in the help, 7 in this block, and the default case below
   count=$(expr $rawcount - 10)
-  echo "I can find the versions of $count programs!"
+  echo "I know how to find the versions of $count programs!"
   exit
 fi
 
@@ -46,25 +46,25 @@ then
 fi
 
 case $1 in
-java | swift | kotlin | vi | vim | nvim)
-  $1 -version
+
+go | restic | yarn)
+  $1 version
   ;;
 
-gcc | rustc | clang | zsh | bash | rsync | git | dotnet | arduino \
-| vlc | convert | ranger | fzf)
-  $1 --version
-  ;;
-
-version | node | perl | lua | ruby | npm)
+conky | exa | firefox | lua | node | npm | perl | ruby | version)
   $1 -v
   ;;
 
-python | tmux | ssh | grep | rg)
+alacritty | grep | python | rg | ssh | tmux)
   $1 -V
   ;;
 
-go | restic)
-  $1 version
+ffmpeg | gimp | java | kotlin | nano | nvim | swift | vi | vim)
+  $1 -version
+  ;;
+
+arduino | bash | clang | convert | dotnet | fzf | gcc | gdb | git | gradle | ranger | rsync | rustc | vlc | zsh)
+  $1 --version
   ;;
 
 *)
