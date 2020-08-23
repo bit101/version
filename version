@@ -1,5 +1,33 @@
 #! /bin/bash 
 
+if [ $1 == -h ]
+then
+  echo "version tells you the versions of programs you have installed."
+  echo "Usage:"
+  echo "  version <program>       get version of program (if known and installed)"
+  echo "  version -h              display this help"
+  echo "  version -c              display count of how many programs are known"
+  echo "  version -v              display version of version."
+  echo "                          yes, 'version version' also works!"
+  exit
+fi
+
+if [ $1 == -c ]
+then
+  # all instances of pipe or rparen in this file
+  rawcount=$(egrep -o "\||)" version | wc -l)
+  # subtract the 6 instances in this block and 1 in the default case
+  count=$(expr $rawcount - 7)
+  echo "I can find the versions of $count programs!"
+  exit
+fi
+
+if [ $1 == -v ]
+then
+  echo "version v0.1.0"
+  exit
+fi
+
 if ! command -v $1 &> /dev/null
 then
     echo "'$1' does not seem to be installed"
@@ -7,19 +35,19 @@ then
 fi
 
 case $1 in
-java | swift | kotlin)
+java | swift | kotlin | vi | vim | nvim)
   $1 -version
   ;;
 
-gcc | rustc | clang | zsh | bash)
+gcc | rustc | clang | zsh | bash | rsync | git)
   $1 --version
   ;;
 
-node | perl | lua | ruby)
+version | node | perl | lua | ruby)
   $1 -v
   ;;
 
-python | tmux | ssh)
+python | tmux | ssh | grep | rg)
   $1 -V
   ;;
 
