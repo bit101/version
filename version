@@ -10,6 +10,7 @@ tools_clang=--version
 tools_conky=-v
 tools_convert=--version
 tools_dotnet=--version
+tools_elixir=-v
 tools_exa=-v
 tools_ffmpeg=-version
 tools_firefox=-v
