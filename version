@@ -6,9 +6,15 @@ tools_alacritty=-V
 tools_arduino=--version
 tools_awk=--version
 tools_bash=--version
+tools_cargo=--version
 tools_clang=--version
+tools_cmake=--version
+tools_ccmake=--version
 tools_conky=-v
 tools_convert=--version
+tools_curl=--version
+tools_direnv=version
+tools_docker=-v
 tools_dotnet=--version
 tools_elixir=-v
 tools_exa=-v
@@ -17,6 +23,7 @@ tools_firefox=-v
 tools_fzf=--version
 tools_gcc=--version
 tools_gdb=--version
+tools_gem=-v
 tools_gimp=-version
 tools_git=--version
 tools_go=version
@@ -33,31 +40,39 @@ tools_lua=-v
 tools_magick=--version
 tools_man=--version
 tools_make=-v
-tools_nano=-version
+tools_nano=--version
 tools_node=-v
+tools_nokogiri=-v
 tools_nordvpn=-v
 tools_npm=-v
 tools_nvim=-version
+tools_pacman=--version
 tools_perl=-v
 tools_python=-V
 tools_python2=-V
 tools_python3=-V
+tools_rake=--version
 tools_ranger=--version
 tools_rbenv=-v
 tools_restic=version
 tools_rg=-V
 tools_rsync=--version
+tools_rubocop=-v
 tools_ruby=-v
 tools_rustc=--version
+tools_screen=-v
 tools_sed=--version
+tools_sidekiq=--version
 tools_slack=-v
 tools_ssh=-V
 tools_swift=-version
 tools_tmux=-V
+tools_valgrind=--version
 tools_version=-v
 tools_vi=-version
 tools_vim=-version
 tools_vlc=--version
+tools_wget=--version
 tools_yarn=version
 tools_zsh=--version
 
@@ -78,6 +93,7 @@ then
   echo "  version <program>    display version of program"
   echo "                       (if known and installed)"
   echo "  version -h           display this help"
+  echo "  version -l           display a list of known programs"
   echo "  version -c           display count of known programs"
   echo "  version -v           display version of version"
   echo "                       (yes, 'version version' also works!)"
@@ -96,6 +112,13 @@ fi
 if [ $1 == -v ]
 then
   echo "version $ver"
+  exit
+fi
+
+# Display all the tools we know
+if [ $1 == -l ]
+then
+  egrep -o "^tools_[^=]*" $(which version) | grep -oP "tools_\K(.*)"
   exit
 fi
 
