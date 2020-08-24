@@ -77,7 +77,6 @@ then
   echo "Usage:"
   echo "  version <program>    display version of program"
   echo "                       (if known and installed)"
-  echo "  version -d <program> display the correct version argument only"
   echo "  version -h           display this help"
   echo "  version -c           display count of known programs"
   echo "  version -v           display version of version"
@@ -100,41 +99,28 @@ then
   exit
 fi
 
-# Display the correct version argument
-if [ $1 == -d ]
-then
-  tool=tools_$2
-  version_arg=${!tool}
-  if [ -z $version_arg ]
-  then
-    # don't know that one
-    echo "I don't know how to find the version of '$2'."
-    echo "If you figure it out, let me know at https://github.com/bit101/version"
-    exit
-  else
-    # success
-    echo "use:  $2 $version_arg"
-    exit
-  fi
-fi
 
-# User does not have that program installed
-if ! command -v $1 &> /dev/null
-then
-    echo "'$1' does not seem to be installed"
-    exit
-fi
-
-# Display the version if we know about the tool
 tool=tools_$1
 version_arg=${!tool}
+
+# do we know about this program?
 if [ -z $version_arg ]
 then
-  # don't know that one
   echo "I don't know how to find the version of '$1'."
   echo "If you figure it out, let me know at https://github.com/bit101/version"
-else
-  # success
-  $1 $version_arg
+  exit
+fi 
+
+# display the correct command for the user
+echo "Command: $1 $version_arg"
+
+# does the user have this program installed?
+if ! command -v $1 &> /dev/null
+then
+  echo "But '$1' does not seem to be installed"
+  exit
 fi
+
+# success. make the call to display the version.
+$1 $version_arg
 
