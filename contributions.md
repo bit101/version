@@ -18,6 +18,8 @@ Example:
 
 A tool named `foo-bar` becomes `tools_foo_bar` in the list. Typing `version foo-bar` will work as expected.
 
+If the argument is not `-v`, `-V`, `version`, `-version`, or `--version` then I'll definitely need to verify it. A link to an official man page would help.
+
 ## Alternately...
 
 Just file an issue listing the tool name and the correct syntax for finding the version. I'll get to it either way.
