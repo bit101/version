@@ -42,3 +42,8 @@ Current version: v0.3.1
 Recognized tools: 90
 
 [Contribution guidelines](contributions.md)
+
+# FAQ
+
+Q: Couldn't you just run all the different variations on an unknown command and see which one works?
+A: Yes. But running various random commands on somoene else's computer and seeing what happens is not a best practice.
