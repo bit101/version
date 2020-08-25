@@ -17,3 +17,11 @@ If the tool has a hyphen `-` character in its name, substitute an underscore `_`
 Example:
 
 A tool named `foo-bar` becomes `tools_foo_bar` in the list. Typing `version foo-bar` will work as expected.
+
+## Alternately...
+
+Just file an issue listing the tool name and the correct syntax for finding the version. I'll get to it either way.
+
+## Errors
+
+If you find an error, report an issue.
