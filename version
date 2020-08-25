@@ -2,21 +2,28 @@
 
 ver="v0.3.1"
 
+# note: replace - with _ in tool name. e.g. pkg-config -> tools_pkg_config
+# script will sanitize the input the same way
+
 tools_alacritty=-V
+tools_apt=-v
 tools_arduino=--version
 tools_awk=--version
 tools_bash=--version
+tools_brew=--version
 tools_cargo=--version
 tools_clang=--version
 tools_cmake=--version
 tools_ccmake=--version
 tools_conky=-v
 tools_convert=--version
+tools_crystal=-v
 tools_curl=--version
 tools_direnv=version
 tools_docker=-v
 tools_dotnet=--version
 tools_elixir=-v
+tools_elm=--version
 tools_exa=-v
 tools_ffmpeg=-version
 tools_firefox=-v
@@ -24,6 +31,7 @@ tools_fzf=--version
 tools_gcc=--version
 tools_gdb=--version
 tools_gem=-v
+tools_ghc=--version
 tools_gimp=-version
 tools_git=--version
 tools_go=version
@@ -34,6 +42,7 @@ tools_haxelib=version
 tools_inkscape=--version
 tools_java=-version
 tools_javac=-version
+tools_julia=-v
 tools_kodi=-v
 tools_kotlin=-version
 tools_lua=-v
@@ -45,9 +54,13 @@ tools_node=-v
 tools_nokogiri=-v
 tools_nordvpn=-v
 tools_npm=-v
+tools_npx=-v
 tools_nvim=-version
 tools_pacman=--version
 tools_perl=-v
+tools_pip=-V
+tools_pip3=-V
+tools_pkg_config=--version
 tools_python=-V
 tools_python2=-V
 tools_python3=-V
@@ -64,6 +77,7 @@ tools_screen=-v
 tools_sed=--version
 tools_sidekiq=--version
 tools_slack=-v
+tools_snap=--version
 tools_ssh=-V
 tools_swift=-version
 tools_tmux=-V
@@ -71,10 +85,13 @@ tools_valgrind=--version
 tools_version=-v
 tools_vi=-version
 tools_vim=-version
+tools_virt_manager=--version
 tools_vlc=--version
 tools_wget=--version
 tools_yarn=version
 tools_zsh=--version
+
+
 
 
 # User forgot to specify the program or a flag
@@ -122,8 +139,8 @@ then
   exit
 fi
 
-
-tool=tools_$1
+sanitized=${1//[-]/_}
+tool=tools_$sanitized
 version_arg=${!tool}
 
 # do we know about this program?
