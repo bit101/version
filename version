@@ -1,6 +1,6 @@
 #! /bin/bash 
 
-ver="v0.3.1"
+ver="v0.3.2"
 
 # note: replace - with _ in tool name. e.g. pkg-config -> tools_pkg_config
 # script will sanitize the input the same way
@@ -8,10 +8,15 @@ ver="v0.3.1"
 tools_alacritty=-V
 tools_apt=-v
 tools_arduino=--version
+tools_autoconf=--version
+tools_automake=--version
 tools_awk=--version
 tools_bash=--version
+tools_bundle=-v
+tools_bundler=-v
 tools_brew=--version
 tools_cargo=--version
+tools_carthage=version
 tools_clang=--version
 tools_clisp=--version
 tools_cmake=--version
@@ -20,6 +25,7 @@ tools_coffee=-v
 tools_conky=-v
 tools_convert=--version
 tools_crystal=-v
+tools_ctags=--version
 tools_curl=--version
 tools_direnv=version
 tools_docker=-v
@@ -29,6 +35,7 @@ tools_elm=--version
 tools_exa=-v
 tools_ffmpeg=-version
 tools_firefox=-v
+tools_fish=-v
 tools_fzf=--version
 tools_gcc=--version
 tools_gdb=--version
@@ -41,6 +48,7 @@ tools_gradle=--version
 tools_grep=-V
 tools_haxe=-version
 tools_haxelib=version
+tools_heroku=-v
 tools_inkscape=--version
 tools_java=-version
 tools_javac=-version
@@ -72,6 +80,7 @@ tools_ranger=--version
 tools_rbenv=-v
 tools_restic=version
 tools_rg=-V
+tools_rome=--version
 tools_rsync=--version
 tools_rubocop=-v
 tools_ruby=-v
@@ -84,6 +93,7 @@ tools_slack=-v
 tools_snap=--version
 tools_ssh=-V
 tools_swift=-version
+tools_thefuck=-v
 tools_tmux=-V
 tools_tsc=-v
 tools_valgrind=--version
