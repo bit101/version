@@ -34,16 +34,20 @@ version gcc    // 10.1.0
 version java   // 1.8.0_262
 version pascal // 'pascal' does not seem to be installed.
 ```
+## Installation
 
 Download, put in your path.
 
+## Info
 Current version: v0.3.1
 
 Recognized tools: 90
 
+## Contribute
+
 [Contribution guidelines](contributions.md)
 
-# FAQ
+## FAQ
 
 Q: Couldn't you just run all the different variations on an unknown command and see which one works?
 
