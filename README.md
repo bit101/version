@@ -52,3 +52,8 @@ Recognized tools: 100
 Q: Couldn't you just run all the different variations on an unknown command and see which one works?
 
 A: Yes. But running various random commands on somoene else's computer and seeing what happens is not a best practice.
+
+
+Q: Why does it give me an error on command _____?
+
+A: Feel free to file an issue and I'll look into it. Some tools have different variants that behave differently. For example, `sed --version` works fine on my Linux machine, but `sed` does not seem to have any version argument at all on my Mac.
