@@ -39,9 +39,9 @@ version pascal // 'pascal' does not seem to be installed.
 Download, put in your path.
 
 ## Info
-Current version: v0.3.1
+Current version: v0.3.2
 
-Recognized tools: 90
+Recognized tools: 100
 
 ## Contribute
 
