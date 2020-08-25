@@ -41,4 +41,4 @@ Current version: v0.3.1
 
 Recognized tools: 90
 
-[Contribution guidelines](contribute.md)
+[Contribution guidelines](contributions.md)
