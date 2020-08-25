@@ -57,3 +57,7 @@ A: Yes. But running various random commands on somoene else's computer and seein
 Q: Why does it give me an error on command _____?
 
 A: Feel free to file an issue and I'll look into it. Some tools have different variants that behave differently. For example, `sed --version` works fine on my Linux machine, but `sed` does not seem to have any version argument at all on my Mac.
+
+Q: Why does it say I don't have a program installed when I know I do?
+
+A: Again, some tools work differently on different systems. For example, on Linux, I can launch Firefox from the command line with `firefox`. But on Mac, I have to type `open -a Firefox`, because on Mac Firefox is not really a command line program. Instead, `Firefox.app` is a special folder containing the executable `firefox` nested a few levels deep. But since that's not in the search path, `version` cannot find it. If you can launch the program Foo by typing `foo` on the command line, then `version foo` should work (if it's in the list). 
