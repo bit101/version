@@ -55,6 +55,12 @@ A: Yes. But running various random commands on somoene else's computer and seein
 
 ---
 
+Q: What operating systems does this work on?
+
+A: It should work on any \*nix based system. It's been pretty thoroughly tested on versions of Linux and Macos. There will be some differences across platforms though. See the questions below.
+
+---
+
 Q: Why does it give me an error on command _____?
 
 A: Feel free to file an issue and I'll look into it. Some tools have different variants that behave differently. For example, `sed --version` works fine on my Linux machine, but `sed` does not seem to have any version argument at all on my Mac.
