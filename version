@@ -1,6 +1,6 @@
 #! /bin/bash 
 
-ver="v0.3.2"
+ver="v0.3.3"
 
 # note: replace - with _ in tool name. e.g. pkg-config -> tools_pkg_config
 # script will sanitize the input the same way
@@ -115,6 +115,7 @@ tools_snap=--version
 tools_ssh=-V
 tools_swift=-version
 tools_thefuck=-v
+tools_thunar=--version
 tools_tmux=-V
 tools_tsc=-v
 tools_valgrind=--version
