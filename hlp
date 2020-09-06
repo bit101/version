@@ -79,7 +79,7 @@ then
   exit
 fi
 
-# success. make the call to display the version.
+# success. make the call to display help.
 $1 $hlp_arg
 
 
