@@ -1,13 +1,13 @@
 #! /bin/bash 
 
-ver="v0.0.1"
+ver="v0.0.2"
 
 # note: replace - with _ in tool name. e.g. pkg-config -> tools_pkg_config
 # script will sanitize the input the same way
 
 tools_nano=-h
 tools_ls=--help
-
+tools_hlp=-h
 
 
 
@@ -21,16 +21,16 @@ fi
 # Display help
 if [ $1 == -h ]
 then
-  echo "version displays the versions of programs you have installed."
+  echo "hlp displays the help of programs you have installed."
   echo ""
   echo "Usage:"
-  echo "  version <program>    display version of program"
+  echo "  hlp <program>    display version of program"
   echo "                       (if known and installed)"
   echo "  hlp -h           display this help"
   echo "  hlp -l           display a list of known programs"
   echo "  hlp -c           display count of known programs"
-  echo "  hlp -v           display version of version"
-  echo "                       (yes, 'version version' also works!)"
+  echo "  hlp -v           display version of hlp"
+  echo "                   (yes, 'hlp hlp' also works!)"
   exit
 fi
 
@@ -38,7 +38,8 @@ fi
 if [ $1 == -c ]
 then
   count=$(egrep -o "^tools_" $(which hlp) | wc -l)
-  echo "I know how to find the versions of $count programs!"
+  echo "I know how to find the helps
+  of $count programs!"
   exit
 fi
 
@@ -63,7 +64,7 @@ hlp_arg=${!tool}
 # do we know about this program?
 if [ -z $hlp_arg ]
 then
-  echo "I don't know how to find the version of '$1'."
+  echo "I don't know how to find the help of '$1'."
   echo "If you figure it out, let me know at https://github.com/bit101/version"
   exit
 fi 
@@ -80,4 +81,5 @@ fi
 
 # success. make the call to display the version.
 $1 $hlp_arg
+
 
