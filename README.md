@@ -2,9 +2,9 @@
 
 Same issue on help
 -h --help
-trying something … does not yet work
+trying something … may work
 --
-there is no Standard
+there is no standard either
 
 <hr>
 
