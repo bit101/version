@@ -1,0 +1,83 @@
+#! /bin/bash 
+
+ver="v0.0.1"
+
+# note: replace - with _ in tool name. e.g. pkg-config -> tools_pkg_config
+# script will sanitize the input the same way
+
+tools_nano=-h
+tools_ls=--help
+
+
+
+
+# User forgot to specify the program or a flag
+if [ -z $1 ]
+then
+  echo "Usage: hlp <program>"
+  exit
+fi
+
+# Display help
+if [ $1 == -h ]
+then
+  echo "version displays the versions of programs you have installed."
+  echo ""
+  echo "Usage:"
+  echo "  version <program>    display version of program"
+  echo "                       (if known and installed)"
+  echo "  hlp -h           display this help"
+  echo "  hlp -l           display a list of known programs"
+  echo "  hlp -c           display count of known programs"
+  echo "  hlp -v           display version of version"
+  echo "                       (yes, 'version version' also works!)"
+  exit
+fi
+
+# Display recognized program count
+if [ $1 == -c ]
+then
+  count=$(egrep -o "^tools_" $(which hlp) | wc -l)
+  echo "I know how to find the versions of $count programs!"
+  exit
+fi
+
+# Display version of hlp
+if [ $1 == -v ]
+then
+  echo "hlp $ver"
+  exit
+fi
+
+# Display all the tools we know
+if [ $1 == -l ]
+then
+  egrep -o "^tools_[^=]*" $(which hlp) | grep -oP "tools_\K(.*)"
+  exit
+fi
+
+sanitized=${1//[-]/_}
+tool=tools_$sanitized
+hlp_arg=${!tool}
+
+# do we know about this program?
+if [ -z $hlp_arg ]
+then
+  echo "I don't know how to find the version of '$1'."
+  echo "If you figure it out, let me know at https://github.com/bit101/version"
+  exit
+fi 
+
+# display the correct command for the user
+echo "Command: $1 $hlp_arg"
+
+# does the user have this program installed?
+if ! command -v $1 &> /dev/null
+then
+  echo "But '$1' does not seem to be installed"
+  exit
+fi
+
+# success. make the call to display the version.
+$1 $hlp_arg
+
