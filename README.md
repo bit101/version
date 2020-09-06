@@ -1,4 +1,13 @@
-# version
+# version -> hlp
+
+Same issue on help
+-h --help
+trying something … does not yet work
+--
+there is no Standard
+
+<hr>
+
 What version do I have of ___?
 
 You've been there...
