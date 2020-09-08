@@ -88,6 +88,7 @@ tools_nvim=-version
 tools_pacman=--version
 tools_pamac=--version
 tools_perl=-v
+tools_php=-v
 tools_pip3=-V
 tools_pip=-V
 tools_pkg_config=--version
