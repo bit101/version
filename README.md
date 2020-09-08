@@ -36,7 +36,24 @@ version pascal // 'pascal' does not seem to be installed.
 ```
 ## Installation
 
-Download, put in your path.
+- Download or clone this repository to your computer.
+- Place the file `version` in a directory that is in your `PATH` variable:
+
+    - To see what's in your `PATH` variable on Linux, open a terminal and type
+
+        ```
+        echo $PATH
+        ```
+
+    - The different directories are sepatated by `:`. Either move `version` to one of these, or append another directory to `PATH` like this:
+
+        ```
+        export PATH=/your/new/directory:$PATH
+        ```
+        
+        Put this line in your `~/.bashrc` file to make this change persistent.
+
+- Now, you are ready to use `version` wherever you are in the filesystem!
 
 ## Info
 Current version: v0.3.3
