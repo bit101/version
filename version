@@ -126,6 +126,7 @@ tools_viewnior=--version
 tools_vim=-version
 tools_virt_manager=--version
 tools_vlc=--version
+tools_wine=--version
 tools_wget=--version
 tools_xrandr=-v
 tools_xsel=--version
