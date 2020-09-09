@@ -45,13 +45,21 @@ version pascal // 'pascal' does not seem to be installed.
         echo $PATH
         ```
 
-    - The different directories are sepatated by `:`. Either move `version` to one of these, or append another directory to `PATH` like this:
+    - The different directories are sepatated by `:`. Either move `version` to one of these, or append another directory to `PATH` like this (assuming you are using `bash`):
 
         ```
         export PATH=/your/new/directory:$PATH
         ```
-        
-        Put this line in your `~/.bashrc` file to make this change persistent.
+
+        When using `fish`, use this command instead:
+
+        ```
+        set PATH "$PATH:/your/new/directory"
+        ```
+
+        Put the appropriate line in your `~/.bashrc` file to make this change persistent.
+        When you are using `zsh`, put it in `~/.zshrc` instead.
+        For `fish` users, the right file is `~/.config/fish/config.fish`.
 
 - Now, you are ready to use `version` wherever you are in the filesystem!
 
