@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/sh
 
 ver="v0.3.3"
 
@@ -152,7 +152,7 @@ tools_yay=--version
 tools_zathura=--version
 tools_zsh=--version
 
-function list_tools {
+list_tools() {
   egrep -o "^tools_[^=]*" $(basename "$0") | grep -oP "tools_\K(.*)"
 }
 
@@ -164,7 +164,7 @@ then
 fi
 
 # Display help
-if [ $1 == -h ]
+if [ $1 = "-h" ]
 then
   echo "version displays the versions of programs you have installed."
   echo ""
@@ -180,7 +180,7 @@ then
 fi
 
 # Display recognized program count
-if [ $1 == -c ]
+if [ $1 = "-c" ]
 then
   count=$(list_tools | wc -l)
   echo "I know how to find the versions of $count programs!"
@@ -188,22 +188,22 @@ then
 fi
 
 # Display version of version
-if [ $1 == -v ]
+if [ $1 = "-v" ]
 then
   echo "version $ver"
   exit
 fi
 
 # Display all the tools we know
-if [ $1 == -l ]
+if [ $1 = "-l" ]
 then
   list_tools
   exit
 fi
 
-sanitized=${1//[-]/_}
+sanitized=`echo "$1" | sed -e "s/-/_/"`
 tool=tools_$sanitized
-version_arg=${!tool}
+eval version_arg=\"\$$tool\"
 
 # do we know about this program?
 if [ -z $version_arg ]
@@ -217,7 +217,8 @@ fi
 echo "Command: $1 $version_arg"
 
 # does the user have this program installed?
-if ! command -v $1 &> /dev/null
+$1 >/dev/null 2>&1
+if [ "${?}" = 127 ]
 then
   echo "But '$1' does not seem to be installed"
   exit
@@ -225,4 +226,3 @@ fi
 
 # success. make the call to display the version.
 $1 $version_arg
-
