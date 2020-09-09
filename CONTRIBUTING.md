@@ -1,4 +1,4 @@
-# Contributions
+# Contributing
 
 To add a tool and its version syntax, fork this repo, add your tool, and make a pull request.
 
