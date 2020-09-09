@@ -7,3 +7,5 @@
 3. Installer script.
 
 4. Homebrew submission.
+
+5. Wiki.
