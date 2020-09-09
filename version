@@ -131,8 +131,9 @@ tools_xsel=--version
 tools_yarn=version
 tools_zsh=--version
 
-
-
+function list_tools {
+  egrep -o "^tools_[^=]*" $(basename "$0") | grep -oP "tools_\K(.*)"
+}
 
 # User forgot to specify the program or a flag
 if [ -z $1 ]
@@ -160,7 +161,7 @@ fi
 # Display recognized program count
 if [ $1 == -c ]
 then
-  count=$(egrep -o "^tools_[^=]*" $(basename "$0") | wc -l)
+  count=$(list_tools | wc -l)
   echo "I know how to find the versions of $count programs!"
   exit
 fi
@@ -175,7 +176,7 @@ fi
 # Display all the tools we know
 if [ $1 == -l ]
 then
-  egrep -o "^tools_[^=]*" $(basename "$0") | grep -oP "tools_\K(.*)"
+  list_tools
   exit
 fi
 
