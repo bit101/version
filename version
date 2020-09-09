@@ -1,4 +1,4 @@
-#! /bin/bash 
+#! /bin/bash
 
 ver="v0.3.3"
 
@@ -152,8 +152,9 @@ tools_yay=--version
 tools_zathura=--version
 tools_zsh=--version
 
-
-
+function list_tools {
+  egrep -o "^tools_[^=]*" $(basename "$0") | grep -oP "tools_\K(.*)"
+}
 
 # User forgot to specify the program or a flag
 if [ -z $1 ]
@@ -181,7 +182,7 @@ fi
 # Display recognized program count
 if [ $1 == -c ]
 then
-  count=$(egrep -o "^tools_" $(which version) | wc -l)
+  count=$(list_tools | wc -l)
   echo "I know how to find the versions of $count programs!"
   exit
 fi
@@ -196,7 +197,7 @@ fi
 # Display all the tools we know
 if [ $1 == -l ]
 then
-  egrep -o "^tools_[^=]*" $(which version) | grep -oP "tools_\K(.*)"
+  list_tools
   exit
 fi
 
@@ -210,7 +211,7 @@ then
   echo "I don't know how to find the version of '$1'."
   echo "If you figure it out, let me know at https://github.com/bit101/version"
   exit
-fi 
+fi
 
 # display the correct command for the user
 echo "Command: $1 $version_arg"
