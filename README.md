@@ -70,7 +70,7 @@ Recognized tools: 125
 
 ## Contribute
 
-[Contribution guidelines](contributions.md)
+[Contribution guidelines](CONTRIBUTING.md)
 
 ## FAQ
 
