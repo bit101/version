@@ -165,7 +165,7 @@ function list_tools {
 if [ -z $1 ]
 then
   echo "Usage: version <program>"
-  exit
+  exit 1
 fi
 
 # Display help
@@ -215,7 +215,7 @@ if [ -z $version_arg ]
 then
   echo "I don't know how to find the version of '$1'."
   echo "If you figure it out, let me know at https://github.com/bit101/version"
-  exit
+  exit 2
 fi
 
 # display the correct command for the user
@@ -225,7 +225,7 @@ echo "Command: $1 $version_arg"
 if ! command -v $1 &> /dev/null
 then
   echo "But '$1' does not seem to be installed"
-  exit
+  exit 3
 fi
 
 # success. make the call to display the version.
