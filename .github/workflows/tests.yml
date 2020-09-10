@@ -1,0 +1,32 @@
+# Builds a snap on a PR/push to the snap branch in order to test new changes.
+
+name: Tests
+
+on:
+  push:
+    branches: [ snap ]
+  pull_request:
+    branches: [ snap ]
+
+jobs:
+  build-snap:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+
+      - name: Install Snapcraft with LXD
+        uses: samuelmeuli/action-snapcraft@v1.1.2 # For Documentation, see https://github.com/marketplace/actions/snapcraft-action
+        with:
+          use_lxd: true
+
+      - name: Build snap
+        run: sg lxd -c 'snapcraft --use-lxd'
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v2
+        if: ${{ success() }}
+        with:
+          name: version.snap
+          path: ./*.snap
