@@ -1,0 +1,35 @@
+name: version # you probably want to 'snapcraft register <name>'
+base: core18 # the base snap is the execution environment for this snap
+version: 'UNRELEASED' # just for humans, typically '1.2+git' or '1.3.2'
+summary: What version do I have of ___? # 79 char long summary
+description: |
+  `version` is a simple utility that tells you what version of a specific program you are running.
+  Why is this needed, you ask? Well, there's no standard:
+
+  ```
+  gcc --version
+  node -v
+  node --version
+  python -V
+  perl -v
+  perl --version
+  go version
+  lua -v
+  rustc --version
+  ```
+
+grade: devel # must be 'stable' to release into candidate/stable channels
+confinement: devmode # use 'strict' once you have the right plugs and slots
+
+parts:
+  version:
+    # See 'snapcraft plugins'
+    plugin: dump
+    source: ./
+    prime:
+      - -contributions.md # Has to be changed to -CONTRIBUTING.md when merged/rebased into master
+      - -README.md
+      - -*.snap
+apps: # What binaries do we want to expose to the outside world?
+  version:
+    command: ./version
