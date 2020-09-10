@@ -58,6 +58,6 @@ jobs:
       - name: We don't know about this program and it is not installed
         run: |
           ./version weflkfsdmlk || returnValue=$?
-          if [ $returnValue -ne 3 ]; then
+          if [ $returnValue -ne 2 ]; then
             exit 1
           fi
