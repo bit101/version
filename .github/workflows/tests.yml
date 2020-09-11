@@ -10,7 +10,7 @@ on:
 
 jobs:
   Script-not-installed:
-    runs-on: ubuntu-latest
+    runs-on: [ ubuntu-latest, macos-latest ]
 
     steps:
       - name: Check out Git repository
@@ -63,7 +63,7 @@ jobs:
           fi
 
   Script-installed:
-    runs-on: ubuntu-latest
+    runs-on: [ ubuntu-latest, macos-latest ]
 
     steps:
       - name: Check out Git repository
