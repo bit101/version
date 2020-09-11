@@ -158,7 +158,7 @@ tools_zathura=--version
 tools_zsh=--version
 
 function list_tools {
-  egrep -o "^tools_[^=]*" $(basename "$0") | grep -oP "tools_\K(.*)"
+  egrep -o "^tools_[^=]*" $(basename "$0") | sed 's/tools_\(.*\)/\1/'
 }
 
 # User forgot to specify the program or a flag
