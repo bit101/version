@@ -41,6 +41,24 @@ version pascal // 'pascal' does not seem to be installed.
 
 - Recognized tools: 125
 
+## Installing / Uninstalling
+
+Install:
+
+```
+cd version
+sudo ./install.sh
+```
+
+Uninstall:
+
+```
+cd version
+sudo ./uninstall.sh
+```
+
+Or see [Installation](https://github.com/bit101/version/wiki#installation) for more options.
+
 ## More info in the [Wiki](https://github.com/bit101/version/wiki)
 
 - [How it Works](https://github.com/bit101/version/wiki#how-it-works)
