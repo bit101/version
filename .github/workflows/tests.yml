@@ -9,7 +9,7 @@ on:
     branches: [ master ]
 
 jobs:
-  Script:
+  Script-not-installed:
     runs-on: ubuntu-latest
 
     steps:
@@ -61,3 +61,64 @@ jobs:
           if [ $returnValue -ne 3 ]; then
             exit 1
           fi
+
+  Script-installed:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+
+      - name: Install version
+        run: ./install.sh && which version
+
+      - name: Forget to specify a program or flag
+        run: |
+          version || returnValue=$?
+          if [ $returnValue -ne 1 ]; then
+            exit 1
+          fi
+
+      - name: Display Help
+        run: |
+          version -h
+          returnValue=$?
+          if [ $returnValue -ne 0 ]; then
+            exit 1
+          fi
+      
+      - name: Display recognized program count
+        run: |
+          version -c
+          returnValue=$?
+          if [ $returnValue -ne 0 ]; then
+            exit 1
+          fi
+
+      - name: Display version of version
+        run: |
+          version -v
+          returnValue=$?
+          if [ $returnValue -ne 0 ]; then
+            exit 1
+          fi
+
+      - name: Display all the tools we know
+        run: |
+          version -l
+          returnValue=$?
+          if [ $returnValue -ne 0 ]; then
+            exit 1
+          fi
+
+      - name: We don't know about this program and it is not installed
+        run: |
+          version weflkfsdmlk || returnValue=$?
+          if [ $returnValue -ne 3 ]; then
+            exit 1
+          fi
+
+      - name: Uninstall version
+        run: |
+          ./uninstall.sh
+          which version || exit
