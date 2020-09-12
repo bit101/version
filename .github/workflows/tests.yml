@@ -61,3 +61,10 @@ jobs:
           if [ $returnValue -ne 2 ]; then
             exit 1
           fi
+          
+      - name: We know about this program but it is not installed
+        run: |
+          ./version swift || returnValue=$?
+          if [ $returnValue -ne 3 ]; then
+            exit 1
+          fi
