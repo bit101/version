@@ -38,6 +38,7 @@ tools_darcs=-v
 tools_direnv=version
 tools_docker=-v
 tools_dotnet=--version
+tools_egrep=--version
 tools_elixir=-v
 tools_elm=--version
 tools_eog=--version
