@@ -139,6 +139,7 @@ tools_tcsh=--version
 tools_tex=-version
 tools_thefuck=-v
 tools_thunar=--version
+tools_tldr=-v
 tools_tlmgr=version
 tools_tmux=-V
 tools_tsc=-v
@@ -161,7 +162,7 @@ tools_zathura=--version
 tools_zsh=--version
 
 function list_tools {
-  egrep -o "^tools_[^=]*" $(basename "$0") | sed 's/tools_\(.*\)/\1/'
+  egrep -o '^tools_[^=]*' $(basename "$0") | sed 's/tools_\(.*\)/\1/'
 }
 
 # User forgot to specify the program or a flag
