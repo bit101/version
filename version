@@ -161,7 +161,7 @@ tools_zathura=--version
 tools_zsh=--version
 
 function list_tools {
-  egrep -o "^tools_[^=]*" $(basename "$0") | sed 's/tools_\(.*\)/\1/'
+  sed -Ene 's/^tools_(.*)=(.*)/\1 \2/p' $(basename "$0")
 }
 
 # User forgot to specify the program or a flag
@@ -180,7 +180,7 @@ then
   echo "  version <program>    display version of program"
   echo "                       (if known and installed)"
   echo "  version -h           display this help"
-  echo "  version -l           display a list of known programs"
+  echo "  version -l           display a list of known programs and their version flags"
   echo "  version -c           display count of known programs"
   echo "  version -v           display version of version"
   echo "                       (yes, 'version version' also works!)"
