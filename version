@@ -139,6 +139,7 @@ tools_tcsh=--version
 tools_tex=-version
 tools_thefuck=-v
 tools_thunar=--version
+tools_tldr=-v
 tools_tlmgr=version
 tools_tmux=-V
 tools_tsc=-v
