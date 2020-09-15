@@ -61,9 +61,9 @@ Or see [Installation](https://github.com/bit101/version/wiki#installation) for m
 
 ## More info in the [Wiki](https://github.com/bit101/version/wiki)
 
-- [How it Works](https://github.com/bit101/version/wiki/How-it-Works)
-
 - [Installation](https://github.com/bit101/version/wiki/Installation)
+
+- [How it Works](https://github.com/bit101/version/wiki/How-it-Works)
 
 - [Contributing](https://github.com/bit101/version/blob/master/CONTRIBUTING.md)
 
