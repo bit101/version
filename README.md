@@ -61,12 +61,10 @@ Or see [Installation](https://github.com/bit101/version/wiki#installation) for m
 
 ## More info in the [Wiki](https://github.com/bit101/version/wiki)
 
-- [How it Works](https://github.com/bit101/version/wiki#how-it-works)
+- [How it Works](https://github.com/bit101/version/wiki/How-it-Works)
 
-- [Installation](https://github.com/bit101/version/wiki#installation)
+- [Installation](https://github.com/bit101/version/wiki/Installation)
 
 - [Contributing](https://github.com/bit101/version/blob/master/CONTRIBUTING.md)
 
-- [Roadmap](https://github.com/bit101/version/wiki#roadmap)
-
-- [FAQ](https://github.com/bit101/version/wiki#faq)
+- [FAQ](https://github.com/bit101/version/wiki/FAQ)
