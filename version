@@ -1,6 +1,6 @@
 #! /bin/bash
 
-ver="v0.3.3"
+ver="v1.0.0"
 
 # note: replace - with _ in tool name. e.g. pkg-config -> tools_pkg_config
 # script will sanitize the input the same way
