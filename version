@@ -38,6 +38,7 @@ tools_darcs=-v
 tools_direnv=version
 tools_docker=-v
 tools_dotnet=--version
+tools_egrep=--version
 tools_elixir=-v
 tools_elm=--version
 tools_eog=--version
@@ -85,6 +86,7 @@ tools_make=-v
 tools_man=--version
 tools_meld=--version
 tools_mousepad=-v
+tools_multipass=version
 tools_mpv=--version
 tools_nano=--version
 tools_nautilus=--version
@@ -128,6 +130,7 @@ tools_sidekiq=--version
 tools_sinfo=-V
 tools_slack=-v
 tools_snap=--version
+tools_snapcraft=version
 tools_spotify=--version
 tools_squeue=-V
 tools_ssh=-V
@@ -137,6 +140,7 @@ tools_tcsh=--version
 tools_tex=-version
 tools_thefuck=-v
 tools_thunar=--version
+tools_tldr=-v
 tools_tlmgr=version
 tools_tmux=-V
 tools_tsc=-v
@@ -159,7 +163,7 @@ tools_zathura=--version
 tools_zsh=--version
 
 function list_tools {
-  egrep -o "^tools_[^=]*" $(basename "$0") | sed 's/tools_\(.*\)/\1/'
+  sed -Ene 's/^tools_(.*)=(.*)/\1 \2/p' $(basename "$0")
 }
 
 # User forgot to specify the program or a flag
@@ -178,7 +182,7 @@ then
   echo "  version <program>    display version of program"
   echo "                       (if known and installed)"
   echo "  version -h           display this help"
-  echo "  version -l           display a list of known programs"
+  echo "  version -l           display a list of known programs and their version flags"
   echo "  version -c           display count of known programs"
   echo "  version -v           display version of version"
   echo "                       (yes, 'version version' also works!)"

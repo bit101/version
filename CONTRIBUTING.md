@@ -1,5 +1,7 @@
 # Contributing
 
+We would love to have your contributions. version becomes more useful as it knows about more tools.
+
 To add a tool and its version syntax, fork this repo, add your tool, and make a pull request.
 
 To add a tool to the list of tools, prefix the tool name with `tools_` and add the correct version argument.

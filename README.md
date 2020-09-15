@@ -57,16 +57,14 @@ cd version
 sudo ./uninstall.sh
 ```
 
-Or see [Installation](https://github.com/bit101/version/wiki#installation) for more options.
+Or see [Installation](https://github.com/bit101/version/wiki/Installation) for more options.
 
 ## More info in the [Wiki](https://github.com/bit101/version/wiki)
 
-- [How it Works](https://github.com/bit101/version/wiki#how-it-works)
+- [Installation](https://github.com/bit101/version/wiki/Installation)
 
-- [Installation](https://github.com/bit101/version/wiki#installation)
+- [How it Works](https://github.com/bit101/version/wiki/How-it-Works)
 
 - [Contributing](https://github.com/bit101/version/blob/master/CONTRIBUTING.md)
 
-- [Roadmap](https://github.com/bit101/version/wiki#roadmap)
-
-- [FAQ](https://github.com/bit101/version/wiki#faq)
+- [FAQ](https://github.com/bit101/version/wiki/FAQ)
