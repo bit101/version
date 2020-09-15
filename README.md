@@ -57,7 +57,7 @@ cd version
 sudo ./uninstall.sh
 ```
 
-Or see [Installation](https://github.com/bit101/version/wiki#installation) for more options.
+Or see [Installation](https://github.com/bit101/version/wiki/Installation) for more options.
 
 ## More info in the [Wiki](https://github.com/bit101/version/wiki)
 
