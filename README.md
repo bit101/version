@@ -37,9 +37,9 @@ version pascal // 'pascal' does not seem to be installed.
 
 ## Info
 
-- Current version: v0.3.3
+- Current version: v1.0.0
 
-- Recognized tools: 125
+- Recognized tools: 156
 
 ## Installing / Uninstalling
 
