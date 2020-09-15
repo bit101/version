@@ -211,8 +211,8 @@ then
   exit
 fi
 
-sanitized=${1//[-]/_}
-tool=tools_$sanitized
+# sanitize and find in the list
+tool=$(echo "tools_$1" | sed -Ee 's/-/_/g')
 version_arg=${!tool}
 
 # do we know about this program?
