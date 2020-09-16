@@ -166,6 +166,29 @@ function list_tools {
   sed -Ene 's/^tools_(.*)=(.*)/\1 \2/p' $(basename "$0")
 }
 
+function try_pacman {
+  command -v pacman &> /dev/null 
+  if [ $? -ne 0 ]
+  then
+    return
+  fi
+
+  # pacman is installed. let's try it
+  echo "version does not know about $1. Checking via pacman..."
+  result="$(pacman -Qi $1 2>/dev/null | grep -Ee 'Version')"
+  if [ $? -eq 0 ]
+  then
+    echo $result | sed -Ene "s/Version : (.*)/$1 version: \1/p"
+    exit
+  fi
+  echo "$1 was not installed via pacman."
+  exit 2
+}
+
+function try_apt {
+  apt list zip --installed | sed -Ee 's/^[^ ]* ([^ ]*) .*/\1/'
+}
+
 # User forgot to specify the program or a flag
 if [ -z $1 ]
 then
@@ -218,9 +241,7 @@ version_arg=${!tool}
 # do we know about this program?
 if [ -z $version_arg ]
 then
-  echo "I don't know how to find the version of '$1'."
-  echo "If you figure it out, let me know at https://github.com/bit101/version"
-  exit 2
+  try_pacman $1
 fi
 
 # display the correct command for the user
