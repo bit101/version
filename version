@@ -188,7 +188,7 @@ fi
 # Display recognized program count
 if [ $1 == -c ]
 then
-  echo "$(grep -Ece '^tools_') known version flags"
+  echo "$(grep -Ece '^tools_' $(basename $0)) known version flags"
   echo "$(version -l | grep -Ece ' --version$') --version"
   echo "$(version -l | grep -Ece ' -v$') -v"
   echo "$(version -l | grep -Ece ' -version$') -version"
