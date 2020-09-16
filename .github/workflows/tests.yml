@@ -68,3 +68,11 @@ jobs:
           if [ $returnValue -ne 3 ]; then
             exit 1
           fi
+          
+      - name: Displays the version of a known program (apt should be installed on ubuntu-latest)
+        run: |
+          ./version apt
+          returnValue=$?
+          if [ $returnValue -ne 0 ]; then
+            exit 1
+          fi
