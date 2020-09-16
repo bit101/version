@@ -193,7 +193,13 @@ fi
 if [ $1 == -c ]
 then
   count=$(list_tools | wc -l)
-  echo "I know how to find the versions of $count programs!"
+  echo "$count known version flags"
+  echo $(version -l | grep -Ee ' --version\b' | wc -l)' --version'
+  echo $(version -l | grep -Ee ' -v\b' | wc -l)' -v'
+  echo $(version -l | grep -Ee ' -version\b' | wc -l)' -version'
+  echo $(version -l | grep -Ee ' -V\b' | wc -l)' -V'
+  echo $(version -l | grep -Ee ' version\b' | wc -l)' version'
+  echo $(version -l | grep -Eve '( --version\b| -v\b| -version\b| -V\b| version\b)' | wc -l)' other'
   exit
 fi
 
