@@ -185,9 +185,26 @@ function try_pacman {
   exit 2
 }
 
+
 function try_apt {
-  apt list zip --installed | sed -Ee 's/^[^ ]* ([^ ]*) .*/\1/'
+  command -v apt &> /dev/null
+  if [ $? -ne 0 ]
+  then
+    return
+  fi
+
+  # apt is installed. let's try it
+  echo "version does not know about $1. Checking via apt..."
+  lines=$(apt list $1 --installed 2>/dev/null | grep -Ece $1)
+  if [ $lines -gt 0 ]
+  then
+    echo $(apt list $1 --installed 2>/dev/null | sed -Ene "s/^[^ ]* ([^ ]*) .*/$1 version: \1/p")
+    exit
+  fi
+  echo "$1 was not installed via apt."
+  exit 2
 }
+
 
 # User forgot to specify the program or a flag
 if [ -z $1 ]
@@ -242,6 +259,8 @@ version_arg=${!tool}
 if [ -z $version_arg ]
 then
   try_pacman $1
+  try_apt $1
+  echo "version does not know about $1."
 fi
 
 # display the correct command for the user
