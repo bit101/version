@@ -162,10 +162,6 @@ tools_yay=--version
 tools_zathura=--version
 tools_zsh=--version
 
-function list_tools {
-  sed -Ene 's/^tools_(.*)=(.*)/\1 \2/p' $(basename "$0")
-}
-
 # User forgot to specify the program or a flag
 if [ -z $1 ]
 then
@@ -192,13 +188,12 @@ fi
 # Display recognized program count
 if [ $1 == -c ]
 then
-  count=$(list_tools | wc -l)
-  echo "$count known version flags"
-  echo "$(version -l | grep -Ee ' --version$' | wc -l) --version"
-  echo "$(version -l | grep -Ee ' -v$' | wc -l) -v"
-  echo "$(version -l | grep -Ee ' -version$' | wc -l) -version"
-  echo "$(version -l | grep -Ee ' -V$' | wc -l) -V"
-  echo "$(version -l | grep -Ee ' version$' | wc -l) version"
+  echo "$(grep -Ece '^tools_') known version flags"
+  echo "$(version -l | grep -Ece ' --version$') --version"
+  echo "$(version -l | grep -Ece ' -v$') -v"
+  echo "$(version -l | grep -Ece ' -version$') -version"
+  echo "$(version -l | grep -Ece ' -V$') -V"
+  echo "$(version -l | grep -Ece ' version$') version"
   exit
 fi
 
@@ -212,7 +207,7 @@ fi
 # Display all the tools we know
 if [ $1 == -l ]
 then
-  list_tools
+  sed -Ene 's/^tools_(.*)=(.*)/\1 \2/p' $(basename "$0")
   exit
 fi
 
