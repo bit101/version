@@ -167,6 +167,7 @@ function list_tools {
 }
 
 function try_pacman {
+  # is pacman installed?
   command -v pacman &> /dev/null 
   if [ $? -ne 0 ]
   then
@@ -175,6 +176,8 @@ function try_pacman {
 
   # pacman is installed. let's try it
   echo "version does not know about $1. Checking via pacman..."
+
+  # this will return non-zero if nothing is found
   result="$(pacman -Qi $1 2>/dev/null | grep -Ee 'Version')"
   if [ $? -eq 0 ]
   then
@@ -187,6 +190,7 @@ function try_pacman {
 
 
 function try_apt {
+  # is apt installed?
   command -v apt &> /dev/null
   if [ $? -ne 0 ]
   then
@@ -195,6 +199,8 @@ function try_apt {
 
   # apt is installed. let's try it
   echo "version does not know about $1. Checking via apt..."
+
+  # this returns 0 even if no results, so we have to count the matched lines
   lines=$(apt list $1 --installed 2>/dev/null | grep -Ece $1)
   if [ $lines -gt 0 ]
   then
@@ -258,8 +264,11 @@ version_arg=${!tool}
 # do we know about this program?
 if [ -z $version_arg ]
 then
+  # maybe a package manager knows it
   try_pacman $1
   try_apt $1
+
+  # should only get here if neither pacman or apt are installed
   echo "version does not know about $1."
 fi
 
