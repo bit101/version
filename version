@@ -188,7 +188,6 @@ function try_pacman {
   exit 2
 }
 
-
 function try_apt {
   # is apt installed?
   command -v apt &> /dev/null
@@ -211,6 +210,27 @@ function try_apt {
   exit 2
 }
 
+function try_dnf {
+  # is dnf installed?
+  command -v dnf &> /dev/null
+  if [ $? -ne 0 ]
+  then
+    return
+  fi
+
+  # dnf is installed. let's try it
+  echo "version does not know about $1. Checking via dnf..."
+
+  # this will return non-zero if nothing is found
+  result="$(dnf list installed $1 2>/dev/null | grep -Ee $1)"
+  if [ $? -eq 0 ]
+  then
+    echo $result | sed -Ene "s/[^ ]+ +([^ ]*).*/$1 version: \1/p"
+    exit
+  fi
+  echo "$1 was not installed via dnf."
+  exit 2
+}
 
 # User forgot to specify the program or a flag
 if [ -z $1 ]
@@ -267,9 +287,11 @@ then
   # maybe a package manager knows it
   try_pacman $1
   try_apt $1
+  try_dnf $1
 
   # should only get here if neither pacman or apt are installed
   echo "version does not know about $1."
+  exit
 fi
 
 # display the correct command for the user
@@ -284,4 +306,3 @@ fi
 
 # success. make the call to display the version.
 $1 $version_arg
-
