@@ -166,6 +166,52 @@ function list_tools {
   sed -Ene 's/^tools_(.*)=(.*)/\1 \2/p' $(basename "$0")
 }
 
+function try_pacman {
+  # is pacman installed?
+  command -v pacman &> /dev/null 
+  if [ $? -ne 0 ]
+  then
+    return
+  fi
+
+  # pacman is installed. let's try it
+  echo "version does not know about $1. Checking via pacman..."
+
+  # this will return non-zero if nothing is found
+  result="$(pacman -Qi $1 2>/dev/null | grep -Ee 'Version')"
+  if [ $? -eq 0 ]
+  then
+    echo $result | sed -Ene "s/Version : (.*)/$1 version: \1/p"
+    exit
+  fi
+  echo "$1 was not installed via pacman."
+  exit 2
+}
+
+
+function try_apt {
+  # is apt installed?
+  command -v apt &> /dev/null
+  if [ $? -ne 0 ]
+  then
+    return
+  fi
+
+  # apt is installed. let's try it
+  echo "version does not know about $1. Checking via apt..."
+
+  # this returns 0 even if no results, so we have to count the matched lines
+  lines=$(apt list $1 --installed 2>/dev/null | grep -Ece $1)
+  if [ $lines -gt 0 ]
+  then
+    echo $(apt list $1 --installed 2>/dev/null | sed -Ene "s/^[^ ]* ([^ ]*) .*/$1 version: \1/p")
+    exit
+  fi
+  echo "$1 was not installed via apt."
+  exit 2
+}
+
+
 # User forgot to specify the program or a flag
 if [ -z $1 ]
 then
@@ -218,9 +264,12 @@ version_arg=${!tool}
 # do we know about this program?
 if [ -z $version_arg ]
 then
-  echo "I don't know how to find the version of '$1'."
-  echo "If you figure it out, let me know at https://github.com/bit101/version"
-  exit 2
+  # maybe a package manager knows it
+  try_pacman $1
+  try_apt $1
+
+  # should only get here if neither pacman or apt are installed
+  echo "version does not know about $1."
 fi
 
 # display the correct command for the user
