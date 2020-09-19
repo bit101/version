@@ -35,9 +35,25 @@ version java   // 1.8.0_262
 version pascal // 'pascal' does not seem to be installed.
 ```
 
+## But wait, there's more!
+
+`version` also uses the package manager on your system to find the versions of programs and libraries that it doesn't know about itself. This puts the number of items that `version` can report the version of into the thousands. This includes libraries which are not directly executable, so don't have a version flag. Examples:
+
+```
+version libxml2   // 2.9.10-2
+version usbutils  // 012-2
+version systemd   // 246.4-1
+```
+
+This feature currently supports the package managers: 
+
+- `apt` (Debian, Ubuntu, and derivatives)
+- `pacman` (Arch, Manjaro, and deriviatives)
+- `dnf` (Fedora and derivatives)
+
 ## Info
 
-- Current version: v1.0.0
+- Current version: v1.1.0
 
 - Recognized tools: 156
 
