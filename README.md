@@ -51,11 +51,15 @@ This feature currently supports the package managers:
 - `pacman` (Arch, Manjaro, and deriviatives)
 - `dnf` (Fedora and derivatives)
 
+And there are plans to look into support for `npm`, `pip`, `snap`, `flatpak`, `home brew`, `linux brew` and possibly others.
+
+Read more here: [Package Manager Integration](https://github.com/bit101/version/wiki/Package-Manager-Integration)
+
 ## Info
 
-- Current version: v1.1.0
+- Current release: v1.1.0 (156 recognized tools)
 
-- Recognized tools: 156
+- Main dev branch: 177 recognized tools
 
 ## Installing / Uninstalling
 
