@@ -51,6 +51,8 @@ This feature currently supports the package managers:
 - `pacman` (Arch, Manjaro, and deriviatives)
 - `dnf` (Fedora and derivatives)
 
+And there are plans too look into support for `npm`, `pip`, `snap`, `flatpak`, `home brew`, `linux brew` and possibly others.
+
 ## Info
 
 - Current release: v1.1.0 (156 recognized tools)
