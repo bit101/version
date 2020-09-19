@@ -22,8 +22,8 @@
   pacman_installed usbutils
   pacman_installed systemd
   pacman_installed less
-  pacman_installed udev
-  pacman_installed cron
+  pacman_installed sudo
+  pacman_installed libxml2
 }
 
 @test "version of unknown commands not installed via pacman" {
@@ -48,7 +48,7 @@ function known_noninstalled {
 }
 
 function pacman_installed {
-  result=$(version $1 | grep -Ece "version does not know about .$1.\. Checking via pacman\.\.\.")
+  result=$(version $1 | grep -Ece "version does not know about .$1.\. Checking via")
   [ $result -eq 1 ]
 
   result=$(version $1 | grep -Ece "$1 version: ")
@@ -56,10 +56,10 @@ function pacman_installed {
 }
 
 function pacman_noninstalled {
-  result=$(version $1 | grep -Ece "version does not know about .$1.\. Checking via pacman\.\.\.")
+  result=$(version $1 | grep -Ece "version does not know about .$1.\. Checking via")
   [ $result -eq 1 ]
 
-  result=$(version $1 | grep -Ece "$1 was not installed via pacman.")
+  result=$(version $1 | grep -Ece "$1 was not installed via")
   [ $result -eq 1 ]
 }
 
