@@ -1,5 +1,0 @@
-- something that version knows about and is installed (git)
-- something that version knows about but is not installed (swift)
-- something that version does not know about
-  - something that was installed by <apt/pacman> (usbutils)
-  - something that was not installed by <apt/pacman> (xxyyzz)

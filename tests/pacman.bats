@@ -22,8 +22,8 @@
   pacman_installed usbutils
   pacman_installed systemd
   pacman_installed less
-  pacman_installed hwinfo
-  pacman_installed which
+  pacman_installed udev
+  pacman_installed cron
 }
 
 @test "version of unknown commands not installed via pacman" {
