@@ -50,8 +50,11 @@ This feature currently supports the package managers:
 - `apt` (Debian, Ubuntu, and derivatives)
 - `pacman` (Arch, Manjaro, and deriviatives)
 - `dnf` (Fedora and derivatives)
+- `snap` (various linux distributions)
+- `npm` (everywhere)
+- `pip` (everywhere)
 
-And there are plans to look into support for `npm`, `pip`, `snap`, `flatpak`, `home brew`, `linux brew` and possibly others.
+And there are plans to look into support for `flatpak`, `home brew`, `linux brew` and possibly others.
 
 Read more here: [Package Manager Integration](https://github.com/bit101/version/wiki/Package-Manager-Integration)
 
