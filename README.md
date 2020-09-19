@@ -53,6 +53,8 @@ This feature currently supports the package managers:
 
 And there are plans to look into support for `npm`, `pip`, `snap`, `flatpak`, `home brew`, `linux brew` and possibly others.
 
+Read more here: [Package Manager Integration](https://github.com/bit101/version/wiki/Package-Manager-Integration)
+
 ## Info
 
 - Current release: v1.1.0 (156 recognized tools)
