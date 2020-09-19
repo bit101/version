@@ -163,7 +163,7 @@ tools_zathura=--version
 tools_zsh=--version
 
 function list_tools {
-  sed -Ene 's/^tools_(.*)=(.*)/\1 \2/p' $(basename "$0")
+  sed -Ene 's/^tools_(.*)=(.*)/\1 \2/p' "$0"
 }
 
 function try_pacman {
@@ -175,7 +175,7 @@ function try_pacman {
   fi
 
   # pacman is installed. let's try it
-  echo "version does not know about $1. Checking via pacman..."
+  echo "version does not know about '$1'. Checking via pacman..."
 
   # this will return non-zero if nothing is found
   result="$(pacman -Qi $1 2>/dev/null | grep -Ee 'Version')"
@@ -197,7 +197,7 @@ function try_apt {
   fi
 
   # apt is installed. let's try it
-  echo "version does not know about $1. Checking via apt..."
+  echo "version does not know about '$1'. Checking via apt..."
 
   # this returns 0 even if no results, so we have to count the matched lines
   lines=$(apt list $1 --installed 2>/dev/null | grep -Ece $1)
@@ -219,7 +219,7 @@ function try_dnf {
   fi
 
   # dnf is installed. let's try it
-  echo "version does not know about $1. Checking via dnf..."
+  echo "version does not know about '$1'. Checking via dnf..."
 
   # this will return non-zero if nothing is found
   result="$(dnf list installed $1 2>/dev/null | grep -Ee $1)"
