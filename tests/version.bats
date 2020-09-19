@@ -1,6 +1,7 @@
 #!/usr/bin/env bats
 
 @test "version of installed known commands" {
+  # does not actually test the return value, but it should fail if the version flag is wrong
   known_installed gcc --version
   known_installed awk --version
   known_installed bash --version
@@ -18,18 +19,18 @@
   known_noninstalled fossil version
 }
 
-@test "version of unknown commands installed via pacman" {
-  pacman_installed usbutils
-  pacman_installed systemd
-  pacman_installed less
-  pacman_installed sudo
-  pacman_installed libxml2
+@test "version of unknown commands installed via package manager" {
+  pm_installed usbutils
+  pm_installed systemd
+  pm_installed less
+  pm_installed sudo
+  pm_installed libxml2
 }
 
-@test "version of unknown commands not installed via pacman" {
-  pacman_noninstalled xxxyyyzzz
-  pacman_noninstalled super_mario_64
-  pacman_noninstalled flight_simulator_2020
+@test "version of unknown commands not installed via package manager" {
+  pm_noninstalled xxxyyyzzz
+  pm_noninstalled super_mario_64
+  pm_noninstalled flight_simulator_2020
 }
 
 # Helper functions
@@ -47,7 +48,7 @@ function known_noninstalled {
   [ $result -eq 1 ]
 }
 
-function pacman_installed {
+function pm_installed {
   result=$(version $1 | grep -Ece "version does not know about .$1.\. Checking via")
   [ $result -eq 1 ]
 
@@ -55,7 +56,7 @@ function pacman_installed {
   [ $result -eq 1 ]
 }
 
-function pacman_noninstalled {
+function pm_noninstalled {
   result=$(version $1 | grep -Ece "version does not know about .$1.\. Checking via")
   [ $result -eq 1 ]
 

@@ -14,3 +14,5 @@
     bats tests/version.bats
 
 These tests rely on specific programs and libraries being installed on the running system. And on others NOT being installed. Thus you may have to edit the test cases to select different programs that match what you actually have installed on your system.
+
+This was tested on Fedora 32 Workstation (dnf), Ubuntu 20.04 (apt), and Manjaro XFCE (pacman).
