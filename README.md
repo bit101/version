@@ -53,9 +53,9 @@ This feature currently supports the package managers:
 
 ## Info
 
-- Current version: v1.1.0
+- Current release: v1.1.0 (156 recognized tools)
 
-- Recognized tools: 156
+- Main dev branch: 177 recognized tools
 
 ## Installing / Uninstalling
 
