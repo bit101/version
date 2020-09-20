@@ -7,7 +7,7 @@
 }
 
 function installed_pip {
-  result=$(version $1 | grep -Ece "checking npm...")
+  result=$(version $1 | grep -Ece "checking pip...")
   [ $result -eq 1 ]
 
   result=$(version $1 | grep -Ece "$1 version: ")
