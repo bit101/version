@@ -215,6 +215,14 @@ function try_apt {
     return
   fi
 
+  # Java has an `apt` that may be installed (annotation processing tool)
+  # Let's make sure we're not looking at that instead of the package manager `apt`
+  # This will fail on Java's `apt`
+  apt -v &> /dev/null
+  if [ $? -ne 0 ]
+  then
+    return
+  fi
   # apt is installed. let's try it
   echo "  checking apt..."
 
