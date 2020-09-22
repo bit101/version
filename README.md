@@ -60,7 +60,7 @@ Read more here: [Package Manager Integration](https://github.com/bit101/version/
 
 ## Info
 
-- Current release: v1.1.0 (156 recognized tools)
+- Current release: v1.2.0 (177 recognized tools)
 
 - Main dev branch: 177 recognized tools
 
