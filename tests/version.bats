@@ -49,7 +49,10 @@ function known_noninstalled {
 }
 
 function pm_installed {
-  result=$(version $1 | grep -Ece "version does not know about .$1.\. Checking via")
+  result=$(version $1 | grep -Ece "version does not know about .$1.")
+  [ $result -eq 1 ]
+
+  result=$(version $1 | grep -Ece "  checking .*\.\.\.")
   [ $result -eq 1 ]
 
   result=$(version $1 | grep -Ece "$1 version: ")
@@ -57,10 +60,11 @@ function pm_installed {
 }
 
 function pm_noninstalled {
-  result=$(version $1 | grep -Ece "version does not know about .$1.\. Checking via")
+  result=$(version $1 | grep -Ece "version does not know about .$1.")
   [ $result -eq 1 ]
 
-  result=$(version $1 | grep -Ece "$1 was not installed via")
-  [ $result -eq 1 ]
+  result=$(version $1 | grep -Ece "  checking .*\.\.\.")
+  # should do multiple checks (snap, npm, pip, etc.)
+  [ $result -gt 1 ]
 }
 

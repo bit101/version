@@ -177,7 +177,7 @@ tools_xetex=-version
 tools_xdotool=--version
 tools_xrandr=-v
 tools_xsel=--version
-tools_yarn=version
+tools_yarn=--version
 tools_yay=--version
 tools_zathura=--version
 tools_zenity=--version
@@ -196,7 +196,7 @@ function try_pacman {
   fi
 
   # pacman is installed. let's try it
-  echo "version does not know about '$1'. Checking via pacman..."
+  echo "  checking pacman..."
 
   # this will return non-zero if nothing is found
   result="$(pacman -Qi $1 2>/dev/null | grep -Ee 'Version')"
@@ -205,8 +205,6 @@ function try_pacman {
     echo $result | sed -Ene "s/Version : (.*)/$1 version: \1/p"
     exit
   fi
-  echo "$1 was not installed via pacman."
-  exit 2
 }
 
 function try_apt {
@@ -217,8 +215,16 @@ function try_apt {
     return
   fi
 
+  # Java has an `apt` that may be installed (annotation processing tool)
+  # Let's make sure we're not looking at that instead of the package manager `apt`
+  # This will fail on Java's `apt`
+  apt -v &> /dev/null
+  if [ $? -ne 0 ]
+  then
+    return
+  fi
   # apt is installed. let's try it
-  echo "version does not know about '$1'. Checking via apt..."
+  echo "  checking apt..."
 
   # this returns 0 even if no results, so we have to count the matched lines
   lines=$(apt list $1 --installed 2>/dev/null | grep -Ece $1)
@@ -227,8 +233,6 @@ function try_apt {
     echo $(apt list $1 --installed 2>/dev/null | sed -Ene "s/^[^ ]* ([^ ]*) .*/$1 version: \1/p")
     exit
   fi
-  echo "$1 was not installed via apt."
-  exit 2
 }
 
 function try_dnf {
@@ -240,7 +244,7 @@ function try_dnf {
   fi
 
   # dnf is installed. let's try it
-  echo "version does not know about '$1'. Checking via dnf..."
+  echo "  checking dnf..."
 
   # this will return non-zero if nothing is found
   result="$(dnf list installed $1 2>/dev/null | grep -Ee $1)"
@@ -249,8 +253,67 @@ function try_dnf {
     echo $result | sed -Ene "s/[^ ]+ +([^ ]*).*/$1 version: \1/p"
     exit
   fi
-  echo "$1 was not installed via dnf."
-  exit 2
+}
+
+function try_snap {
+  # is snap installed?
+  command -v snap &> /dev/null
+  if [ $? -ne 0 ]
+  then
+    return
+  fi
+
+  # snap is installed. let's try it
+  echo "  checking snap..."
+
+  # this will return non-zero if nothing is found
+  result="$(snap list $1 2>/dev/null | grep -Ee $1)"
+  if [ $? -eq 0 ]
+  then
+    echo $result | sed -Ene "s/^$1 +([^ ]*).*/$1 version: \1/p"
+    exit
+  fi
+}
+
+function try_npm {
+  # is npm installed?
+  command -v npm &> /dev/null
+  if [ $? -ne 0 ]
+  then
+    return
+  fi
+
+  # npm is installed. let's try it
+  echo "  checking npm..."
+
+  # this will return non-zero if nothing is found
+  result="$(npm list --global --depth 0 $1 2>/dev/null | grep -m 1 -Ee $1)"
+  if [ $? -eq 0 ]
+  then
+    echo $result | sed -Ene "s/.*$1@(.*)/$1 version: \1/p"
+    exit
+  fi
+}
+
+function try_pip {
+  # is pip installed?
+  command -v pip &> /dev/null
+  if [ $? -ne 0 ]
+  then
+    return
+  fi
+
+  # pip is installed. let's try it
+  echo "  checking pip..."
+
+  # this returns 0 even if no results, so we have to count the matched lines
+  lines=$(pip list 2>/dev/null | grep -Ece ^$1)
+  if [ $lines -gt 0 ]
+  then
+    result="$(pip list 2>/dev/null | grep -Ee ^$1)"
+    echo $result | sed -Ene "s/^$1 +(.*)/$1 version: \1/p"
+    exit
+  fi
 }
 
 # User forgot to specify the program or a flag
@@ -306,12 +369,16 @@ version_arg=${!tool}
 if [ -z $version_arg ]
 then
   # maybe a package manager knows it
+  echo "version does not know about '$1'"
   try_pacman $1
   try_apt $1
   try_dnf $1
+  try_snap $1
+  try_npm $1
+  try_pip $1
 
   # should only get here if neither pacman or apt are installed
-  echo "version does not know about $1."
+  echo "version was unable to find any info on '$1'"
   exit
 fi
 
