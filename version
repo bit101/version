@@ -275,6 +275,26 @@ function try_snap {
   fi
 }
 
+function try_flatpak {
+  # is flatpak installed?
+  command -v flatpak &> /dev/null
+  if [ $? -ne 0 ]
+  then
+    return
+  fi
+
+  # flatpak is installed. let's try it
+  echo "  checking flatpak..."
+  # this is just a list of all packages, with grep for what we are looking for
+  # so we have to count the matched lines
+  lines=$(flatpak list 2>/dev/null | grep -Ece "^$1") 
+  if [ $lines -gt 0 ]
+  then
+    echo $(flatpak list | sed -Ene "s/^$1\t[^\t]+\t([^\t]*).*/$1 version: \1/p") 
+    exit
+  fi
+}
+
 function try_npm {
   # is npm installed?
   command -v npm &> /dev/null
@@ -398,6 +418,7 @@ then
     try_apt $1
     try_dnf $1
     try_snap $1
+    try_flatpak $1
   fi
 
   try_npm $1
