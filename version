@@ -316,6 +316,27 @@ function try_pip {
   fi
 }
 
+function try_brew {
+  # is brew installed?
+  command -v brew &> /dev/null
+  if [ $? -ne 0 ]
+  then
+    return
+  fi
+
+  # pip is installed. let's try it
+  echo "  checking brew..."
+
+  # this returns nothing even if no results, so we have to count the matched lines
+  lines=$(brew info $1 2>/dev/null | grep -Ece ^$1)
+  if [ $lines -gt 0 ]
+  then
+    result="$(brew info $1 2>/dev/null | grep -Ee ^$1)"
+    echo $result | sed -Ene "s/^$1: (.*)/$1 version: \1/p"
+    exit
+  fi
+}
+
 # User forgot to specify the program or a flag
 if [ -z $1 ]
 then
@@ -370,12 +391,18 @@ if [ -z $version_arg ]
 then
   # maybe a package manager knows it
   echo "version does not know about '$1'"
-  try_pacman $1
-  try_apt $1
-  try_dnf $1
-  try_snap $1
+
+  # if we're on mac, we can skip these
+  if [[ `uname` != 'Darwin' ]]; then
+    try_pacman $1
+    try_apt $1
+    try_dnf $1
+    try_snap $1
+  fi
+
   try_npm $1
   try_pip $1
+  try_brew $1
 
   # should only get here if neither pacman or apt are installed
   echo "version was unable to find any info on '$1'"
