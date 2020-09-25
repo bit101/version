@@ -423,11 +423,12 @@ then
     try_dnf $1
     try_snap $1
     try_flatpak $1
+  else
+    try_brew $1
   fi
 
   try_npm $1
   try_pip $1
-  try_brew $1
 
   # should only get here if neither pacman or apt are installed
   echo "version was unable to find any info on '$1'"
