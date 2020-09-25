@@ -9,10 +9,20 @@
         cd bats
         sudo ./install /usr/local
 
-3. Back in the verison repo, run the tests:
+3. Back in the version repo, run the tests:
 
-        bats tests/version.bats
+        cd <path_to_version_repo>/tests
+        bats version.bats
+        bats snap.bats
+        bats pip.bats
+        bats flaptak.bats
+        bats brew.bats
+        bats npm.bats
 
-These tests rely on specific programs and libraries being installed on the running system. And on others NOT being installed. Thus you may have to edit the test cases to select different programs that match what you actually have installed on your system.
+To run all tests:
 
-This was tested on Fedora 32 Workstation (dnf), Ubuntu 20.04 (apt), and Manjaro XFCE (pacman).
+        bats *.bats
+
+These tests rely on specific programs and libraries being installed on the running system. And on others NOT being installed. Thus you may have to edit the test cases to select different programs that match what you actually have installed on your system. Or install the programs that it is looking for.
+
+This was tested on Fedora 32 Workstation (dnf), Ubuntu 20.04, and Manjaro XFCE (pacman), and Macos
