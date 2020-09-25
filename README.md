@@ -47,23 +47,24 @@ version systemd   // 246.4-1
 
 This feature currently supports the package managers: 
 
-- `apt` (Debian, Ubuntu, and derivatives)
-- `pacman` (Arch, Manjaro, and deriviatives)
-- `dnf` (Fedora and derivatives)
+- `apt` (Linux - Debian, Ubuntu, and derivatives)
+- `pacman` (Linux - Arch, Manjaro, and deriviatives)
+- `dnf` (Linux - Fedora and derivatives)
 - `snap` (Linux)
 - `npm` (Mac and Linux)
 - `pip` (Mac and Linux)
-
-And the following are coded and being tested:
-
-- `flatpak` (Linx)
+- `flatpak` (Linux)
 - `brew` (Mac and Linux)
+
+If `version` doesn't know about the command, it will start searching through any of the package managers that are installed and report what it finds:
+
+![version.png](version.png)
 
 Read more here: [Package Manager Integration](https://github.com/bit101/version/wiki/Package-Manager-Integration)
 
 ## Info
 
-- Current release: v1.2.0 (177 recognized tools)
+- Current release: v1.3.0 (183 recognized tools)
 
 - Main dev branch: 177 recognized tools
 
