@@ -66,8 +66,6 @@ Read more here: [Package Manager Integration](https://github.com/bit101/version/
 
 - Current release: v1.3.0 (183 recognized tools)
 
-- Main dev branch: 177 recognized tools
-
 ## Installing / Uninstalling
 
 Install:
