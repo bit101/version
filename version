@@ -285,12 +285,16 @@ function try_flatpak {
 
   # flatpak is installed. let's try it
   echo "  checking flatpak..."
-  # this is just a list of all packages, with grep for what we are looking for
-  # so we have to count the matched lines
-  lines=$(flatpak list 2>/dev/null | grep -Ece "^$1") 
-  if [ $lines -gt 0 ]
+
+  # `flatpak list` gives a list of all packages. format:
+  # name<tab>id<tab>version<tab>branch<tab>installation
+  # version is sometimes empty.
+  # grep for what we are looking for, convert tabs to newlines.
+  # version will be line 3
+  result=$(flatpak list 2>/dev/null | grep -Ee "^$1" | tr '\t' '\n' | sed '3q;d')
+  if [ ! -z $result ]
   then
-    echo $(flatpak list | sed -Ene "s/^$1\t[^\t]+\t([^\t]*).*/$1 version: \1/p") 
+    echo "$1 version: $result"
     exit
   fi
 }
