@@ -355,7 +355,7 @@ function try_pkgin {
   lines=$(pkgin list 2>/dev/null | grep -Ece ^$1)
   if [ $lines -gt 0 ]
   then
-    result="$(pkgin list $1 2>/dev/null | grep -Ee ^$1)"
+    result="$(pkgin list 2>/dev/null | grep -Ee ^$1)"
     echo $result | sed -Ene "s/^$1\-([[:graph:]]*).*/$1 version: \1/p"
     exit
   fi
