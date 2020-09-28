@@ -348,7 +348,7 @@ function try_pkgin {
     return
   fi
 
-  # pip is installed. let's try it
+  # pkgin is installed. let's try it
   echo "  checking pkgin..."
 
   # pkgin returns a list of all installed applications
