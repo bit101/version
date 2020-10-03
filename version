@@ -185,6 +185,7 @@ tools_xrandr=-v
 tools_xsel=--version
 tools_yarn=--version
 tools_yay=--version
+tools_youtube_dl=--version
 tools_zathura=--version
 tools_zenity=--version
 tools_zsh=--version
