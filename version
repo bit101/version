@@ -85,6 +85,7 @@ tools_haxe=-version
 tools_haxelib=version
 tools_heroku=-v
 tools_htop=-v
+tools_hugo=version
 tools_inkscape=--version
 tools_java=-version
 tools_javac=-version
