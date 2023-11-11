@@ -68,7 +68,18 @@ Read more here: [Package Manager Integration](https://github.com/bit101/version/
 
 ## Installing / Uninstalling
 
-Install:
+### Arch Linux:
+
+```
+yay -S version
+```
+or
+
+```
+paru -S version
+```
+
+### Manual Install:
 
 ```
 cd version
