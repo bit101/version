@@ -70,6 +70,8 @@ Read more here: [Package Manager Integration](https://github.com/bit101/version/
 
 ### Arch Linux:
 
+Install through whatever AUR helper you use. e.g.:
+
 ```
 yay -S version
 ```
@@ -77,6 +79,10 @@ or
 
 ```
 paru -S version
+```
+or
+```
+pamac install version
 ```
 
 ### Manual Install:
