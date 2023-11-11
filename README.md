@@ -85,7 +85,7 @@ or
 pamac install version
 ```
 
-### Manual Install:
+### Install Scripts:
 
 ```
 cd version
