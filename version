@@ -348,6 +348,27 @@ function try_pip {
   fi
 }
 
+function try_pkgin {
+  # is pkgin installed?
+  command -v pkgin &> /dev/null
+  if [ $? -ne 0 ]
+  then
+    return
+  fi
+
+  # pkgin is installed. let's try it
+  echo "  checking pkgin..."
+
+  # pkgin returns a list of all installed applications
+  lines=$(pkgin list 2>/dev/null | grep -Ece ^$1)
+  if [ $lines -gt 0 ]
+  then
+    result="$(pkgin list 2>/dev/null | grep -Ee ^$1)"
+    echo $result | sed -Ene "s/^$1\-([[:graph:]]*).*/$1 version: \1/p"
+    exit
+  fi
+}
+
 function try_brew {
   # is brew installed?
   command -v brew &> /dev/null
@@ -436,6 +457,7 @@ then
   try_npm $1
   try_pip $1
   try_brew $1
+  try_pkgin $1
 
   # should only get here if neither pacman or apt are installed
   echo "version was unable to find any info on '$1'"
