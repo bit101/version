@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/sh
 
 ver="v1.3.0"
 
@@ -14,6 +14,8 @@ tools_automake=--version
 tools_awk=--version
 tools_baobab=--version
 tools_bash=--version
+tools_batcat=--version
+tools_bat=--version
 tools_bibtex=-version
 tools_borg=-V
 tools_brew=--version
@@ -45,6 +47,7 @@ tools_direnv=version
 tools_docker=-v
 tools_dosbox=--version
 tools_dotnet=--version
+tools_dropbox=version
 tools_ed=-V
 tools_egrep=--version
 tools_electron=-v
@@ -53,6 +56,7 @@ tools_elm=--version
 tools_engrampa=--version
 tools_eog=--version
 tools_exa=-v
+tools_exfalso=-v
 tools_expac=--version
 tools_eyeD3=--version
 tools_ffmpeg=-version
@@ -77,6 +81,7 @@ tools_go=version
 tools_google_chrome_stable=--version
 tools_gpodder=--version
 tools_gradle=--version
+tools_grc=--version
 tools_grep=-V
 tools_guake=--version
 tools_gzip=-V
@@ -90,9 +95,11 @@ tools_inkscape=--version
 tools_java=-version
 tools_javac=-version
 tools_julia=-v
+tools_k3b=-v
 tools_kodi=-v
 tools_kotlin=-version
 tools_ksh=--version
+tools_ktorrent=-v
 tools_lame=--version
 tools_latex=-version
 tools_latexmk=-version
@@ -118,6 +125,7 @@ tools_npm=-v
 tools_npx=-v
 tools_nvim=-version
 tools_pacman=--version
+tools_palapeli=-v
 tools_pamac=--version
 tools_pdflatex=-version
 tools_perl=-v
@@ -184,6 +192,7 @@ tools_xetex=-version
 tools_xfce4_terminal=--version
 tools_xrandr=-v
 tools_xsel=--version
+tools_yakuake=--version
 tools_yarn=--version
 tools_yay=--version
 tools_youtube_dl=--version
@@ -191,14 +200,14 @@ tools_zathura=--version
 tools_zenity=--version
 tools_zsh=--version
 
-function list_tools {
+list_tools() {
   sed -Ene 's/^tools_(.*)=(.*)/\1 \2/p' "$0"
 }
 
-function try_pacman {
+try_pacman() {
   # is pacman installed?
-  command -v pacman &> /dev/null 
-  if [ $? -ne 0 ]
+  which pacman >/dev/null 2>&1
+  if [ "$?" != 0 ]
   then
     return
   fi
@@ -208,17 +217,17 @@ function try_pacman {
 
   # this will return non-zero if nothing is found
   result="$(pacman -Qi $1 2>/dev/null | grep -Ee 'Version')"
-  if [ $? -eq 0 ]
+  if [ "$?" = 0 ]
   then
     echo $result | sed -Ene "s/Version : (.*)/$1 version: \1/p"
     exit
   fi
 }
 
-function try_apt {
+try_apt() {
   # is apt installed?
-  command -v apt &> /dev/null
-  if [ $? -ne 0 ]
+  which apt >/dev/null 2>&1
+  if [ "$?" != 0 ]
   then
     return
   fi
@@ -226,8 +235,8 @@ function try_apt {
   # Java has an `apt` that may be installed (annotation processing tool)
   # Let's make sure we're not looking at that instead of the package manager `apt`
   # This will fail on Java's `apt`
-  apt -v &> /dev/null
-  if [ $? -ne 0 ]
+  apt -v >/dev/null 2>&1
+  if [ "$?" != 0 ]
   then
     return
   fi
@@ -243,10 +252,10 @@ function try_apt {
   fi
 }
 
-function try_dnf {
+try_dnf() {
   # is dnf installed?
-  command -v dnf &> /dev/null
-  if [ $? -ne 0 ]
+  which dnf >/dev/null 2>&1
+  if [ "$?" != 0 ]
   then
     return
   fi
@@ -256,17 +265,17 @@ function try_dnf {
 
   # this will return non-zero if nothing is found
   result="$(dnf list installed $1 2>/dev/null | grep -Ee $1)"
-  if [ $? -eq 0 ]
+  if [ "$?" = 0 ]
   then
     echo $result | sed -Ene "s/[^ ]+ +([^ ]*).*/$1 version: \1/p"
     exit
   fi
 }
 
-function try_snap {
+try_snap() {
   # is snap installed?
-  command -v snap &> /dev/null
-  if [ $? -ne 0 ]
+  which snap >/dev/null 2>&1
+  if [ "$?" != 0 ]
   then
     return
   fi
@@ -276,17 +285,17 @@ function try_snap {
 
   # this will return non-zero if nothing is found
   result="$(snap list $1 2>/dev/null | grep -Ee $1)"
-  if [ $? -eq 0 ]
+  if [ "$?" = 0 ]
   then
     echo $result | sed -Ene "s/^$1 +([^ ]*).*/$1 version: \1/p"
     exit
   fi
 }
 
-function try_flatpak {
+try_flatpak() {
   # is flatpak installed?
-  command -v flatpak &> /dev/null
-  if [ $? -ne 0 ]
+  which flatpak >/dev/null 2>&1
+  if [ "$?" != 0 ]
   then
     return
   fi
@@ -307,10 +316,10 @@ function try_flatpak {
   fi
 }
 
-function try_npm {
+try_npm() {
   # is npm installed?
-  command -v npm &> /dev/null
-  if [ $? -ne 0 ]
+  which npm >/dev/null 2>&1
+  if [ "$?" != 0 ]
   then
     return
   fi
@@ -320,17 +329,17 @@ function try_npm {
 
   # this will return non-zero if nothing is found
   result="$(npm list --global --depth 0 $1 2>/dev/null | grep -m 1 -Ee $1)"
-  if [ $? -eq 0 ]
+  if [ "$?" = 0 ]
   then
     echo $result | sed -Ene "s/.*$1@(.*)/$1 version: \1/p"
     exit
   fi
 }
 
-function try_pip {
+try_pip() {
   # is pip installed?
-  command -v pip &> /dev/null
-  if [ $? -ne 0 ]
+  which pip >/dev/null 2>&1
+  if [ "$?" != 0 ]
   then
     return
   fi
@@ -348,10 +357,10 @@ function try_pip {
   fi
 }
 
-function try_brew {
+try_brew() {
   # is brew installed?
-  command -v brew &> /dev/null
-  if [ $? -ne 0 ]
+  which brew >/dev/null 2>&1
+  if [ "$?" != 0 ]
   then
     return
   fi
@@ -377,7 +386,7 @@ then
 fi
 
 # Display help
-if [ $1 == -h ]
+if [ $1 = "-h" ]
 then
   echo "version displays the versions of programs you have installed."
   echo ""
@@ -393,7 +402,7 @@ then
 fi
 
 # Display recognized program count
-if [ $1 == -c ]
+if [ $1 = "-c" ]
 then
   count=$(list_tools | wc -l)
   echo "I know how to find the versions of $count programs!"
@@ -401,22 +410,23 @@ then
 fi
 
 # Display version of version
-if [ $1 == -v ]
+if [ $1 = "-v" ]
 then
   echo "version $ver"
   exit
 fi
 
 # Display all the tools we know
-if [ $1 == -l ]
+if [ $1 = "-l" ]
 then
   list_tools
   exit
 fi
 
 # sanitize and find in the list
-tool=$(echo "tools_$1" | sed -Ee 's/-/_/g')
-version_arg=${!tool}
+sanitized=`echo "$1" | sed -e "s/-/_/"`
+tool=tools_$sanitized
+eval version_arg=\"\$$tool\"
 
 # do we know about this program?
 if [ -z $version_arg ]
@@ -425,7 +435,7 @@ then
   echo "version does not know about '$1'"
 
   # if we're on mac, we can skip these
-  if [[ `uname` != 'Darwin' ]]; then
+  if [ `uname` != 'Darwin' ]; then
     try_pacman $1
     try_apt $1
     try_dnf $1
@@ -446,7 +456,8 @@ fi
 echo "Command: $1 $version_arg"
 
 # does the user have this program installed?
-if ! command -v $1 &> /dev/null
+which $1 >/dev/null 2>&1
+if [ "$?" != 0 ]
 then
   echo "But '$1' does not seem to be installed"
   exit 3
