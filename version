@@ -207,7 +207,7 @@ list_tools() {
 try_pacman() {
   # is pacman installed?
   which pacman >/dev/null 2>&1
-  if [ "$?" -ne 0 ]
+  if [ "$?" != 0 ]
   then
     return
   fi
@@ -217,7 +217,7 @@ try_pacman() {
 
   # this will return non-zero if nothing is found
   result="$(pacman -Qi $1 2>/dev/null | grep -Ee 'Version')"
-  if [ "$?" -eq 0 ]
+  if [ "$?" = 0 ]
   then
     echo $result | sed -Ene "s/Version : (.*)/$1 version: \1/p"
     exit
@@ -227,7 +227,7 @@ try_pacman() {
 try_apt() {
   # is apt installed?
   which apt >/dev/null 2>&1
-  if [ "$?" -ne 0 ]
+  if [ "$?" != 0 ]
   then
     return
   fi
@@ -236,7 +236,7 @@ try_apt() {
   # Let's make sure we're not looking at that instead of the package manager `apt`
   # This will fail on Java's `apt`
   apt -v >/dev/null 2>&1
-  if [ "$?" -ne 0 ]
+  if [ "$?" != 0 ]
   then
     return
   fi
@@ -255,7 +255,7 @@ try_apt() {
 try_dnf() {
   # is dnf installed?
   which dnf >/dev/null 2>&1
-  if [ "$?" -ne 0 ]
+  if [ "$?" != 0 ]
   then
     return
   fi
@@ -265,7 +265,7 @@ try_dnf() {
 
   # this will return non-zero if nothing is found
   result="$(dnf list installed $1 2>/dev/null | grep -Ee $1)"
-  if [ "$?" -eq 0 ]
+  if [ "$?" = 0 ]
   then
     echo $result | sed -Ene "s/[^ ]+ +([^ ]*).*/$1 version: \1/p"
     exit
@@ -275,7 +275,7 @@ try_dnf() {
 try_snap() {
   # is snap installed?
   which snap >/dev/null 2>&1
-  if [ "$?" -ne 0 ]
+  if [ "$?" != 0 ]
   then
     return
   fi
@@ -285,7 +285,7 @@ try_snap() {
 
   # this will return non-zero if nothing is found
   result="$(snap list $1 2>/dev/null | grep -Ee $1)"
-  if [ "$?" -eq 0 ]
+  if [ "$?" = 0 ]
   then
     echo $result | sed -Ene "s/^$1 +([^ ]*).*/$1 version: \1/p"
     exit
@@ -295,7 +295,7 @@ try_snap() {
 try_flatpak() {
   # is flatpak installed?
   which flatpak >/dev/null 2>&1
-  if [ "$?" -ne 0 ]
+  if [ "$?" != 0 ]
   then
     return
   fi
@@ -319,7 +319,7 @@ try_flatpak() {
 try_npm() {
   # is npm installed?
   which npm >/dev/null 2>&1
-  if [ "$?" -ne 0 ]
+  if [ "$?" != 0 ]
   then
     return
   fi
@@ -329,7 +329,7 @@ try_npm() {
 
   # this will return non-zero if nothing is found
   result="$(npm list --global --depth 0 $1 2>/dev/null | grep -m 1 -Ee $1)"
-  if [ "$?" -eq 0 ]
+  if [ "$?" = 0 ]
   then
     echo $result | sed -Ene "s/.*$1@(.*)/$1 version: \1/p"
     exit
@@ -339,7 +339,7 @@ try_npm() {
 try_pip() {
   # is pip installed?
   which pip >/dev/null 2>&1
-  if [ "$?" -ne 0 ]
+  if [ "$?" != 0 ]
   then
     return
   fi
@@ -360,7 +360,7 @@ try_pip() {
 try_brew() {
   # is brew installed?
   which brew >/dev/null 2>&1
-  if [ "$?" -ne 0 ]
+  if [ "$?" != 0 ]
   then
     return
   fi
