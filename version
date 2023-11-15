@@ -148,6 +148,7 @@ tools_rsync=--version
 tools_rubocop=-v
 tools_ruby=-v
 tools_rustc=--version
+tools_rustup=--version
 tools_samba=--version
 tools_sbatch=-V
 tools_scalac=-version
