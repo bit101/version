@@ -1,6 +1,6 @@
 #! /bin/sh
 
-ver="v1.4.0"
+ver="v1.4.1"
 
 # note: replace - with _ in tool name. e.g. pkg-config -> tools_pkg_config
 # script will sanitize the input the same way
@@ -44,6 +44,7 @@ tools_curl=--version
 tools_darcs=-v
 tools_deluge=-V
 tools_direnv=version
+tools_dlv=version
 tools_docker=-v
 tools_dosbox=--version
 tools_dotnet=--version
@@ -78,6 +79,7 @@ tools_gitkraken=--version
 tools_glade=--version
 tools_gnome_boxes=--version
 tools_go=version
+tools_gopls=version
 tools_google_chrome_stable=--version
 tools_gpodder=--version
 tools_gradle=--version
@@ -128,6 +130,7 @@ tools_nvim=-version
 tools_pacman=--version
 tools_palapeli=-v
 tools_pamac=--version
+tools_parted=-v
 tools_pdflatex=-version
 tools_perl=-v
 tools_php=-v
@@ -142,6 +145,7 @@ tools_rake=--version
 tools_ranger=--version
 tools_rbenv=-v
 tools_restic=version
+tools_revive=-version
 tools_rg=-V
 tools_rofi=-v
 tools_rome=--version
@@ -180,6 +184,7 @@ tools_ufw=version
 tools_valgrind=--version
 tools_version=-v
 tools_vi=-version
+tools_viddy=--version
 tools_viewnior=--version
 tools_vim=-version
 tools_virt_manager=--version
