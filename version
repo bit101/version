@@ -118,6 +118,7 @@ tools_nautilus=--version
 tools_ncdu=-v
 tools_neofetch=--version
 tools_ninja=--version
+tools_nix=--version
 tools_node=-v
 tools_nokogiri=-v
 tools_nordvpn=-v
