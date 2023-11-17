@@ -212,7 +212,7 @@ list_tools() {
 }
 
 try_pacman() {
-  # is pacman installed?
+  # is pacman installed? (Arch and derivatives)
   command -v pacman >/dev/null 2>&1 || return
 
   # pacman is installed. let's try it
@@ -228,7 +228,7 @@ try_pacman() {
 }
 
 try_apt() {
-  # is apt installed?
+  # is apt installed? (Debian, Ubuntu and derivatives)
   command -v apt >/dev/null 2>&1 || return
 
   # Java has an `apt` that may be installed (annotation processing tool)
@@ -249,7 +249,7 @@ try_apt() {
 }
 
 try_dnf() {
-  # is dnf installed?
+  # is dnf installed? (Fedora and derivatives) 
   command -v dnf >/dev/null 2>&1 || return
 
   # dnf is installed. let's try it
