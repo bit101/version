@@ -206,11 +206,7 @@ list_tools() {
 
 try_pacman() {
   # is pacman installed?
-  which pacman >/dev/null 2>&1
-  if [ "$?" != 0 ]
-  then
-    return
-  fi
+  command -v pacman >/dev/null 2>&1 || return
 
   # pacman is installed. let's try it
   echo "  checking pacman..."
@@ -226,20 +222,13 @@ try_pacman() {
 
 try_apt() {
   # is apt installed?
-  which apt >/dev/null 2>&1
-  if [ "$?" != 0 ]
-  then
-    return
-  fi
+  command -v apt >/dev/null 2>&1 || return
 
   # Java has an `apt` that may be installed (annotation processing tool)
   # Let's make sure we're not looking at that instead of the package manager `apt`
   # This will fail on Java's `apt`
-  apt -v >/dev/null 2>&1
-  if [ "$?" != 0 ]
-  then
-    return
-  fi
+  apt -v >/dev/null 2>&1 || return
+
   # apt is installed. let's try it
   echo "  checking apt..."
 
@@ -254,11 +243,7 @@ try_apt() {
 
 try_dnf() {
   # is dnf installed?
-  which dnf >/dev/null 2>&1
-  if [ "$?" != 0 ]
-  then
-    return
-  fi
+  command -v dnf >/dev/null 2>&1 || return
 
   # dnf is installed. let's try it
   echo "  checking dnf..."
@@ -274,11 +259,7 @@ try_dnf() {
 
 try_snap() {
   # is snap installed?
-  which snap >/dev/null 2>&1
-  if [ "$?" != 0 ]
-  then
-    return
-  fi
+  command -v snap >/dev/null 2>&1 || return
 
   # snap is installed. let's try it
   echo "  checking snap..."
@@ -294,11 +275,7 @@ try_snap() {
 
 try_flatpak() {
   # is flatpak installed?
-  which flatpak >/dev/null 2>&1
-  if [ "$?" != 0 ]
-  then
-    return
-  fi
+  command -v flatpak >/dev/null 2>&1 || return
 
   # flatpak is installed. let's try it
   echo "  checking flatpak..."
@@ -318,11 +295,7 @@ try_flatpak() {
 
 try_npm() {
   # is npm installed?
-  which npm >/dev/null 2>&1
-  if [ "$?" != 0 ]
-  then
-    return
-  fi
+  command -v npm >/dev/null 2>&1 || return
 
   # npm is installed. let's try it
   echo "  checking npm..."
@@ -338,11 +311,7 @@ try_npm() {
 
 try_pip() {
   # is pip installed?
-  which pip >/dev/null 2>&1
-  if [ "$?" != 0 ]
-  then
-    return
-  fi
+  command -v pip >/dev/null 2>&1 || return
 
   # pip is installed. let's try it
   echo "  checking pip..."
@@ -359,11 +328,7 @@ try_pip() {
 
 try_brew() {
   # is brew installed?
-  which brew >/dev/null 2>&1
-  if [ "$?" != 0 ]
-  then
-    return
-  fi
+  command -v brew >/dev/null 2>&1 || return
 
   # pip is installed. let's try it
   echo "  checking brew..."
@@ -456,9 +421,8 @@ fi
 echo "Command: $1 $version_arg"
 
 # does the user have this program installed?
-which $1 >/dev/null 2>&1
-if [ "$?" != 0 ]
-then
+command -v $1 >/dev/null 2>&1
+if [ "$?" != 0 ]; then
   echo "But '$1' does not seem to be installed"
   exit 3
 fi
