@@ -61,13 +61,13 @@ This feature currently supports the package managers:
 - `pacman` (Linux - Arch, Manjaro, and deriviatives)
 - `dnf` (Linux - Fedora and derivatives)
 - `snap` (Linux)
-- `npm` (Mac and Linux)
-- `pip` (Mac and Linux)
+- `npm` (MacOS and Linux)
+- `pip` (MacOS and Linux)
 - `flatpak` (Linux)
-- `brew` (Mac and Linux)
+- `brew` (MacOS and Linux)
+- `macports` (MacOS)
 
 Todo (potential):
-- `Macports` - MacOS
 - `Fink` - MacOS
 - `RPM` - Redhat
 - `Yum` - Redhat
