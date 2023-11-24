@@ -359,10 +359,10 @@ try_macports() {
   # pip is installed. let's try it
   echo "  checking macports..."
 
-  result=$(port list $1 2>/dev/null)
+  result=$(port installed $1 2>/dev/null)
   if [ "$result" != "" ]
   then
-    echo $result
+    echo $result | sed -Ene "s/^.*$1 (.*)/$1 version: \1/p"
     exit
   fi
 }
