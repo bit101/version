@@ -57,6 +57,7 @@ tools_elm=--version
 tools_engrampa=--version
 tools_eog=--version
 tools_exa=-v
+tools_eza=-v
 tools_exfalso=-v
 tools_expac=--version
 tools_eyeD3=--version
@@ -137,6 +138,7 @@ tools_php=-v
 tools_pip3=-V
 tools_pip=-V
 tools_pkg_config=--version
+tools_port=version
 tools_pyenv=-v
 tools_python2=-V
 tools_python3=-V
@@ -350,6 +352,23 @@ try_brew() {
   fi
 }
 
+try_macports() {
+  # is macports installed?
+  command -v port >/dev/null 2>&1 || return
+
+  # pip is installed. let's try it
+  echo "  checking macports..."
+
+  result=$(port list $1 2>/dev/null)
+  if [ "$result" != "" ]
+  then
+    echo $result
+    exit
+  fi
+}
+
+
+
 # User forgot to specify the program or a flag
 if [ -z $1 ]
 then
@@ -418,6 +437,7 @@ then
   try_npm $1
   try_pip $1
   try_brew $1
+  try_macports $1
 
   # should only get here if neither pacman or apt are installed
   echo "version was unable to find any info on '$1'"
