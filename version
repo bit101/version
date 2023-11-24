@@ -352,7 +352,7 @@ try_brew() {
   # is brew installed?
   command -v brew >/dev/null 2>&1 || return
 
-  # pip is installed. let's try it
+  # brew is installed. let's try it
   echo "  checking brew..."
 
   # this returns nothing even if no results, so we have to count the matched lines
@@ -369,7 +369,7 @@ try_macports() {
   # is macports installed?
   command -v port >/dev/null 2>&1 || return
 
-  # pip is installed. let's try it
+  # macports is installed. let's try it
   echo "  checking macports..."
 
   result=$(port list $1 2>/dev/null)

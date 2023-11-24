@@ -69,8 +69,6 @@ This feature currently supports the package managers:
 
 Todo (potential):
 - `Fink` - MacOS
-- `RPM` - Redhat
-- `Yum` - Redhat
 - `ZYpp` - OpenSUSE
 - `Portage` - Gentoo
 - `Nix` - Nix
