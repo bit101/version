@@ -66,11 +66,16 @@ This feature currently supports the package managers:
 - `flatpak` (Linux)
 - `brew` (Mac and Linux)
 
-Todo:
-- `Macports`
+Todo (potential):
+- `Macports` - MacOS
+- `Fink` - MacOS
+- `RPM` - Redhat
+- `Yum` - Redhat
+- `ZYpp` - OpenSUSE
+- `Portage` - Gentoo
+- `Nix` - Nix
 
 If `version` doesn't know about the command, it will start searching through any of the package managers that are installed and report what it finds:
-
 
 Examples:
 
