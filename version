@@ -213,6 +213,19 @@ list_tools() {
   sed -Ene 's/^tools_(.*)=(.*)/\1 \2/p' "$0"
 }
 
+list_pms() {
+  echo "Supported package managers:"
+  echo "  apt"  
+  echo "  brew"  
+  echo "  dnf"
+  echo "  flatpak"  
+  echo "  macports"  
+  echo "  npm"  
+  echo "  pacman"  
+  echo "  pip"  
+  echo "  snap"  
+}
+
 try_pacman() {
   # is pacman installed? (Arch and derivatives)
   command -v pacman >/dev/null 2>&1 || return
@@ -339,7 +352,7 @@ try_brew() {
   # is brew installed?
   command -v brew >/dev/null 2>&1 || return
 
-  # pip is installed. let's try it
+  # brew is installed. let's try it
   echo "  checking brew..."
 
   # this returns nothing even if no results, so we have to count the matched lines
@@ -356,13 +369,13 @@ try_macports() {
   # is macports installed?
   command -v port >/dev/null 2>&1 || return
 
-  # pip is installed. let's try it
+  # macports is installed. let's try it
   echo "  checking macports..."
 
-  result=$(port list $1 2>/dev/null)
+  result=$(port installed $1 2>/dev/null)
   if [ "$result" != "" ]
   then
-    echo $result
+    echo $result | sed -Ene "s/^.*$1 (.*)/$1 version: \1/p"
     exit
   fi
 }
@@ -386,6 +399,7 @@ then
   echo "                       (if known and installed)"
   echo "  version -h           display this help"
   echo "  version -l           display a list of known programs and their version flags"
+  echo "  version -p           display a list of supported package managers"
   echo "  version -c           display count of known programs"
   echo "  version -v           display version of version"
   echo "                       (yes, 'version version' also works!)"
@@ -411,6 +425,13 @@ fi
 if [ $1 = "-l" ]
 then
   list_tools
+  exit
+fi
+
+# Display all the tools we know
+if [ $1 = "-p" ]
+then
+  list_pms
   exit
 fi
 
