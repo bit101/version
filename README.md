@@ -114,7 +114,7 @@ Read more here: [Package Manager Integration](https://github.com/bit101/version/
 
 ## Info
 
-- Current release: v1.3.0 (183 recognized tools)
+- Current release: v1.5.0 (200+ recognized tools)
 
 ## Installing / Uninstalling
 
