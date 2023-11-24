@@ -95,8 +95,15 @@ version usbutils
 #   checking pip...
 # setuptools version: 68.2.2
 ```
-
-![version.png](version.png)
+```
+version foo
+# version does not know about 'foo'
+#   checking apt...
+#   checking snap...
+#   checking npm...
+#   checking pip...
+# version was unable to find any info on 'foo'
+```
 
 Read more here: [Package Manager Integration](https://github.com/bit101/version/wiki/Package-Manager-Integration)
 
