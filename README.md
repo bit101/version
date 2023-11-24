@@ -112,7 +112,7 @@ Read more here: [Package Manager Integration](https://github.com/bit101/version/
 
 ## Info
 
-- Current release: v1.5.1 (200+ recognized tools)
+- Current release: v1.5.2 (200+ recognized tools)
 
 ## Installing / Uninstalling
 
